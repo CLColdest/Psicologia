@@ -55,7 +55,7 @@ export default async function ContactPage() {
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <Reveal className="page-hero-panel panel-pad" delay={0.08}>
           <div className="space-y-6">
-            <div className="space-y-3">
+            <div className="space-y-4">
               <h2 className="text-3xl leading-tight md:text-4xl">{page.closingTitle}</h2>
               <p className="max-w-3xl text-base leading-7 text-[color:var(--muted)]">{page.closingBody}</p>
             </div>

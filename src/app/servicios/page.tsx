@@ -56,8 +56,10 @@ export default async function ServicesPage() {
       <section className="grid gap-6 md:grid-cols-3">
         {page.services.map((service, index) => (
           <Reveal key={service.title} className="elevated-card card-pad rounded-[1.5rem]" delay={index * 0.08}>
-            <h2 className="text-2xl leading-tight">{service.title}</h2>
-            <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{service.body}</p>
+            <div className="stack-card-copy">
+              <h2 className="text-2xl leading-tight">{service.title}</h2>
+              <p className="text-base leading-7 text-[color:var(--muted)]">{service.body}</p>
+            </div>
           </Reveal>
         ))}
       </section>

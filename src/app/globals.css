@@ -110,6 +110,15 @@ ul {
   gap: 1.5rem;
 }
 
+.stack-card-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.field-surface {
+  background: rgba(255, 255, 255, 0.72);
+}
+
 .elevated-card {
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: rgba(255, 255, 255, 0.68);
@@ -190,5 +199,9 @@ ul {
 
   .stack-lg {
     gap: 1.75rem;
+  }
+
+  .stack-card-copy {
+    gap: 1.15rem;
   }
 }

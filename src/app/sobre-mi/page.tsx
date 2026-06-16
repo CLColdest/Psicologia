@@ -76,8 +76,10 @@ export default async function AboutPage() {
       <section className="grid gap-6 md:grid-cols-3">
         {page.sections.map((section, index) => (
           <Reveal key={section.title} className="elevated-card card-pad rounded-[1.5rem]" delay={index * 0.08}>
-            <h2 className="text-2xl leading-tight">{section.title}</h2>
-            <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{section.body}</p>
+            <div className="stack-card-copy">
+              <h2 className="text-2xl leading-tight">{section.title}</h2>
+              <p className="text-base leading-7 text-[color:var(--muted)]">{section.body}</p>
+            </div>
           </Reveal>
         ))}
       </section>

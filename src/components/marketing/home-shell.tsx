@@ -86,13 +86,15 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
         <div className="grid gap-4 lg:col-span-2">
           {content.services.items.map((service, index) => (
             <Reveal key={service.title} className="elevated-card card-pad rounded-[1.5rem]" delay={index * 0.08}>
-              <div className="mb-4 flex items-center gap-3">
-                <span className="soft-chip flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-[color:var(--foreground)]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-2xl leading-tight">{service.title}</h3>
+              <div className="stack-card-copy">
+                <div className="flex items-center gap-3">
+                  <span className="soft-chip flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-[color:var(--foreground)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-2xl leading-tight">{service.title}</h3>
+                </div>
+                <p className="text-base leading-7 text-[color:var(--muted)]">{service.description}</p>
               </div>
-              <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{service.description}</p>
             </Reveal>
           ))}
         </div>
@@ -111,8 +113,10 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
               className="elevated-card card-pad rounded-[1.5rem]"
               delay={index * 0.08}
             >
-              <h3 className="text-xl leading-tight">{step.title}</h3>
-              <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{step.description}</p>
+              <div className="stack-card-copy">
+                <h3 className="text-xl leading-tight">{step.title}</h3>
+                <p className="text-base leading-7 text-[color:var(--muted)]">{step.description}</p>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -127,8 +131,10 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
         <div className="grid gap-4">
           {content.faqPreview.items.map((item, index) => (
             <Reveal key={item.question} className="elevated-card card-pad rounded-[1.5rem]" delay={index * 0.08}>
-              <h3 className="text-xl leading-tight">{item.question}</h3>
-              <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.answer}</p>
+              <div className="stack-card-copy">
+                <h3 className="text-xl leading-tight">{item.question}</h3>
+                <p className="text-base leading-7 text-[color:var(--muted)]">{item.answer}</p>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -191,7 +197,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
           <div className="stack-md">
             <p className="editorial-label">{content.contact.eyebrow}</p>
             <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.contact.title}</h2>
-            <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.contact.body}</p>
+            <p className="max-w-2xl pt-2 text-lg leading-8 text-[color:var(--muted)] md:pt-3">{content.contact.body}</p>
             <div className="grid gap-3 text-sm text-[color:var(--foreground)] md:grid-cols-2">
               <span className="soft-chip rounded-[1.1rem] px-4 py-3">
                 <strong>{content.contact.whatsapp}:</strong> {practiceSettings.phoneLabel}
