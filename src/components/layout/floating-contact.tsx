@@ -104,7 +104,7 @@ export function FloatingContact({ practiceSettings, uiLabels }: FloatingContactP
         ) : null}
 
         <a
-          className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold text-[color:var(--accent-foreground)] shadow-[0_20px_50px_rgba(63,42,16,0.18)] transition hover:translate-y-[-1px] hover:shadow-[0_26px_56px_rgba(63,42,16,0.24)]"
+          className="accent-fill inline-flex min-h-14 items-center gap-3 rounded-full px-5 py-3 text-sm font-semibold shadow-[0_20px_50px_rgba(63,42,16,0.18)] transition hover:translate-y-[-1px] hover:shadow-[0_26px_56px_rgba(63,42,16,0.24)]"
           href={practiceSettings.whatsappUrl}
           rel="noreferrer"
           target="_blank"

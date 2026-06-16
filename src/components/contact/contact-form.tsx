@@ -132,7 +132,7 @@ export function ContactForm({ labels }: ContactFormProps) {
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <button
-            className="inline-flex min-h-12 items-center justify-center rounded-full bg-[color:var(--accent)] px-6 py-3 text-sm font-semibold text-[color:var(--accent-foreground)] transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)] disabled:cursor-not-allowed disabled:opacity-70"
+            className="accent-fill inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)] disabled:cursor-not-allowed disabled:opacity-70"
             disabled={status === "submitting"}
             type="submit"
           >

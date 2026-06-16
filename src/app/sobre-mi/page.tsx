@@ -45,7 +45,7 @@ export default async function AboutPage() {
           <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{page.intro}</p>
           <div className="flex flex-wrap gap-4">
             <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[color:var(--accent)] px-6 py-3 text-sm font-semibold text-[color:var(--accent-foreground)] transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)]"
+              className="accent-fill inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)]"
               href="/contacto"
             >
               {page.primaryCta}

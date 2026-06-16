@@ -49,7 +49,7 @@ export function SiteHeader({ siteName, brandTagline, practiceSettings, uiLabels 
               key={`${link.href}-${link.label}`}
               className={`rounded-full px-4 py-2 text-sm transition ${
                 isActivePath(buildSitePath(link.href))
-                  ? "bg-[color:var(--accent)] text-[color:var(--accent-foreground)] shadow-[0_10px_20px_rgba(63,42,16,0.08)]"
+                  ? "accent-fill shadow-[0_10px_20px_rgba(63,42,16,0.08)]"
                   : "text-[color:var(--muted)] hover:text-[color:color-mix(in_srgb,var(--foreground)_56%,#2f241d)]"
               }`}
               href={buildSitePath(link.href)}
@@ -61,7 +61,7 @@ export function SiteHeader({ siteName, brandTagline, practiceSettings, uiLabels 
 
         <div className="flex items-center gap-3">
           <a
-            className="hidden rounded-full bg-[color:var(--accent)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--accent-foreground)] shadow-[0_12px_24px_rgba(63,42,16,0.1)] transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)] md:inline-flex"
+            className="accent-fill hidden rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] shadow-[0_12px_24px_rgba(63,42,16,0.1)] transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)] md:inline-flex"
             href={practiceSettings.whatsappUrl}
             rel="noreferrer"
             target="_blank"

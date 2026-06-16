@@ -132,6 +132,17 @@ ul {
   box-shadow: 0 10px 24px rgba(63, 42, 16, 0.05);
 }
 
+.accent-fill {
+  background: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+
+.accent-fill svg,
+.accent-fill span,
+.accent-fill strong {
+  color: inherit;
+}
+
 .editorial-label {
   display: inline-flex;
   align-items: center;
