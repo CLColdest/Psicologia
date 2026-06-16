@@ -21,6 +21,18 @@ export function SiteHeader({ siteName, brandTagline, practiceSettings, uiLabels 
     { href: "/contacto", label: uiLabels.contactLabel }
   ];
 
+  function isActivePath(href: string) {
+    if (!pathname) {
+      return false;
+    }
+
+    if (href === "/") {
+      return pathname === "/" || pathname === "/es";
+    }
+
+    return pathname === href || pathname === `/es${href}`;
+  }
+
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 md:px-6">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-[1.6rem] border border-black/8 bg-[color:rgba(250,247,242,0.82)] px-5 py-4 shadow-[0_18px_42px_rgba(63,42,16,0.08)] backdrop-blur-xl">
@@ -36,7 +48,7 @@ export function SiteHeader({ siteName, brandTagline, practiceSettings, uiLabels 
             <Link
               key={`${link.href}-${link.label}`}
               className={`rounded-full px-4 py-2 text-sm transition ${
-                pathname === buildSitePath(link.href)
+                isActivePath(buildSitePath(link.href))
                   ? "bg-[color:var(--accent)] text-[color:var(--accent-foreground)] shadow-[0_10px_20px_rgba(63,42,16,0.08)]"
                   : "text-[color:var(--muted)] hover:text-[color:color-mix(in_srgb,var(--foreground)_56%,#2f241d)]"
               }`}

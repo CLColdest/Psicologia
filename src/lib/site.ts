@@ -96,19 +96,35 @@ function toLinearChannel(value: number) {
   return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
 }
 
-export function getContrastTextColor(backgroundColor: string, darkTextColor: string, lightTextColor = "#FFFFFF") {
-  const rgb = parseHexColor(backgroundColor);
+function getRelativeLuminance(color: { red: number; green: number; blue: number }) {
+  return (
+    0.2126 * toLinearChannel(color.red) +
+    0.7152 * toLinearChannel(color.green) +
+    0.0722 * toLinearChannel(color.blue)
+  );
+}
 
-  if (!rgb) {
+function getContrastRatio(a: { red: number; green: number; blue: number }, b: { red: number; green: number; blue: number }) {
+  const luminanceA = getRelativeLuminance(a);
+  const luminanceB = getRelativeLuminance(b);
+  const lighter = Math.max(luminanceA, luminanceB);
+  const darker = Math.min(luminanceA, luminanceB);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+export function getContrastTextColor(backgroundColor: string, darkTextColor: string, lightTextColor = "#FFFFFF") {
+  const background = parseHexColor(backgroundColor);
+  const dark = parseHexColor(darkTextColor);
+  const light = parseHexColor(lightTextColor);
+
+  if (!background || !dark || !light) {
     return darkTextColor;
   }
 
-  const luminance =
-    0.2126 * toLinearChannel(rgb.red) +
-    0.7152 * toLinearChannel(rgb.green) +
-    0.0722 * toLinearChannel(rgb.blue);
+  const darkContrast = getContrastRatio(background, dark);
+  const lightContrast = getContrastRatio(background, light);
 
-  return luminance < 0.45 ? lightTextColor : darkTextColor;
+  return lightContrast > darkContrast ? lightTextColor : darkTextColor;
 }
 
 export const defaultThemeSettings: ThemeSettings = {
