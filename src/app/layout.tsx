@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import "@/app/globals.css";
-import { FloatingContact } from "@/components/layout/floating-contact";
-import { SiteHeader } from "@/components/layout/site-header";
+import { AppShell } from "@/components/layout/app-shell";
 import { getSiteSettings, mergePracticeSettings, mergeThemeSettings, mergeUiLabels } from "@/lib/cms/content";
 import { siteConfig } from "@/lib/site";
 
@@ -34,16 +33,15 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             font-family: var(--font-heading), serif;
           }
         `}</style>
-        <div className="site-theme-shell relative min-h-screen overflow-x-hidden" style={themeStyle}>
-          <SiteHeader
-            brandTagline={siteSettings?.brandTagline}
-            practiceSettings={practiceSettings}
-            siteName={siteSettings?.siteName}
-            uiLabels={uiLabels}
-          />
+        <AppShell
+          brandTagline={siteSettings?.brandTagline}
+          practiceSettings={practiceSettings}
+          siteName={siteSettings?.siteName}
+          themeStyle={themeStyle}
+          uiLabels={uiLabels}
+        >
           {children}
-          <FloatingContact practiceSettings={practiceSettings} uiLabels={uiLabels} />
-        </div>
+        </AppShell>
       </body>
     </html>
   );
