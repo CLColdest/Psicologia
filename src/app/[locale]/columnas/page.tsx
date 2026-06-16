@@ -65,14 +65,14 @@ export default async function PostsPage({ params }: PostsPageProps) {
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-12 md:gap-24 md:py-20">
-      <section className="page-hero-panel grid gap-8 p-8 md:grid-cols-[1.1fr_0.9fr] md:p-10">
-        <Reveal className="space-y-5">
+      <section className="page-hero-panel panel-pad grid gap-8 md:grid-cols-[1.1fr_0.9fr]">
+        <Reveal className="stack-lg">
           <p className="editorial-label">{page.eyebrow}</p>
           <h1 className="max-w-5xl text-5xl leading-[0.94] md:text-7xl">{page.title}</h1>
           <p className="max-w-3xl text-lg leading-8 text-[color:var(--muted)]">{page.intro}</p>
         </Reveal>
 
-        <Reveal className="elevated-card grid gap-4 rounded-[1.7rem] p-6 md:p-7" delay={0.08}>
+        <Reveal className="elevated-card card-pad-lg grid gap-4 rounded-[1.7rem]" delay={0.08}>
           <p className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
             {locale === "es" ? "Bitacora editorial" : "Editorial notebook"}
           </p>
@@ -119,7 +119,7 @@ export default async function PostsPage({ params }: PostsPageProps) {
               )
             ) : null}
 
-            <div className="space-y-4 p-6">
+            <div className="stack-md card-pad">
               <div className="flex items-center justify-between gap-4">
                 <span className="text-xs uppercase tracking-[0.24em] text-[color:var(--accent)]">{articleNumber(index)}</span>
                 <span className="h-px flex-1 bg-[color:color-mix(in_srgb,var(--accent)_24%,transparent)]" />

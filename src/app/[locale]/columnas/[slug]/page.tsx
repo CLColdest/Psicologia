@@ -48,7 +48,7 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-12 px-6 py-12 md:gap-16 md:py-20">
-      <section className="page-hero-panel space-y-6 p-8 md:p-10">
+      <section className="page-hero-panel panel-pad stack-lg">
         <Reveal className="space-y-6">
           <p className="editorial-label">{locale === "es" ? "Columna" : "Article"}</p>
           <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
@@ -78,14 +78,14 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
 
       <section className="article-prose">
         {body.map((paragraph, index) => (
-          <Reveal key={index} className={index === 0 ? "elevated-card rounded-[1.75rem] px-7 py-6" : ""} delay={index * 0.04}>
+          <Reveal key={index} className={index === 0 ? "elevated-card rounded-[1.75rem] card-pad-lg" : ""} delay={index * 0.04}>
             <p className="max-w-none">{paragraph}</p>
           </Reveal>
         ))}
       </section>
 
       {post.authorBio ? (
-        <Reveal className="elevated-card rounded-[1.75rem] p-8">
+        <Reveal className="elevated-card card-pad-lg rounded-[1.75rem]">
           <p className="text-sm uppercase tracking-[0.22em] text-[color:var(--accent)]">
             {locale === "es" ? "Sobre la autora" : "About the author"}
           </p>

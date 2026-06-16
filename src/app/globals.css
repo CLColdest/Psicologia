@@ -88,6 +88,28 @@ ul {
   box-shadow: 0 24px 70px rgba(63, 42, 16, 0.08);
 }
 
+.panel-pad {
+  padding: 1.75rem;
+}
+
+.card-pad {
+  padding: 1.5rem;
+}
+
+.card-pad-lg {
+  padding: 1.75rem;
+}
+
+.stack-md {
+  display: grid;
+  gap: 1rem;
+}
+
+.stack-lg {
+  display: grid;
+  gap: 1.5rem;
+}
+
 .page-hero-panel::after {
   content: "";
   position: absolute;
@@ -154,4 +176,18 @@ ul {
   font-size: 1.22rem;
   line-height: 1.92;
   color: color-mix(in srgb, var(--foreground) 58%, #2f241d);
+}
+
+@media (min-width: 768px) {
+  .panel-pad {
+    padding: 2.25rem;
+  }
+
+  .card-pad-lg {
+    padding: 2rem;
+  }
+
+  .stack-lg {
+    gap: 1.75rem;
+  }
 }

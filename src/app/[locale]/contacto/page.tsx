@@ -66,7 +66,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-12 md:gap-16 md:py-20">
-      <Reveal className="page-hero-panel p-8 md:p-10">
+      <Reveal className="page-hero-panel panel-pad">
         <h1 className="max-w-4xl text-5xl leading-[0.94] md:text-7xl">{page.title}</h1>
       </Reveal>
 
@@ -89,7 +89,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <Reveal
-          className="page-hero-panel p-8"
+          className="page-hero-panel panel-pad"
           delay={0.08}
         >
           <div className="space-y-6">
@@ -123,7 +123,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
           </div>
         </Reveal>
 
-        <Reveal className="elevated-card rounded-[1.75rem] bg-white/65 p-4 md:p-5">
+        <Reveal className="elevated-card card-pad rounded-[1.75rem] bg-white/65">
           <div className="overflow-hidden rounded-[1.4rem] border border-black/10">
             <iframe
               className="h-[360px] w-full"

@@ -68,8 +68,8 @@ export function ContactForm({ labels, locale }: ContactFormProps) {
   }
 
   return (
-    <section className="page-hero-panel p-8">
-      <div className="space-y-3">
+    <section className="page-hero-panel panel-pad">
+      <div className="stack-md">
         <h2 className="text-3xl leading-tight md:text-4xl">{labels.formTitle}</h2>
         <p className="max-w-2xl text-base leading-7 text-[color:var(--muted)]">{labels.formIntro}</p>
       </div>

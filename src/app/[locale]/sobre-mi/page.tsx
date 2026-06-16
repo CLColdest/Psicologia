@@ -73,8 +73,8 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-12 md:gap-24 md:py-20">
-      <section className="page-hero-panel grid gap-10 p-8 lg:grid-cols-[1fr_0.8fr] lg:items-end md:p-10">
-        <Reveal className="space-y-5">
+      <section className="page-hero-panel panel-pad grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+        <Reveal className="stack-lg">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{page.eyebrow}</p>
           <h1 className="max-w-4xl text-5xl leading-[0.94] md:text-7xl">{page.title}</h1>
           <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{page.intro}</p>
@@ -95,7 +95,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </Reveal>
 
         <Reveal
-          className="elevated-card rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(238,228,217,0.92))] p-8"
+          className="elevated-card card-pad-lg rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(238,228,217,0.92))]"
           delay={0.08}
         >
           <ul className="grid gap-4">
@@ -112,7 +112,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         {page.sections.map((section, index) => (
           <Reveal
             key={section.title}
-            className="elevated-card rounded-[1.5rem] p-6"
+            className="elevated-card card-pad rounded-[1.5rem]"
             delay={index * 0.08}
           >
             <h2 className="text-2xl leading-tight">{section.title}</h2>
@@ -132,7 +132,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
             {page.testimonials.map((testimonial, index) => (
               <Reveal
                 key={`${testimonial.name}-${index}`}
-                className="elevated-card rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(238,228,217,0.92))] p-6"
+                className="elevated-card card-pad rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(238,228,217,0.92))]"
                 delay={index * 0.08}
               >
                 <p className="text-lg leading-8 text-[color:var(--foreground)]">“{testimonial.quote}”</p>

@@ -34,8 +34,8 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-20 px-6 py-10 md:gap-28 md:py-16">
       <section className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
-        <Reveal className="space-y-6">
-          <div className="space-y-5">
+        <Reveal className="stack-lg">
+          <div className="stack-lg">
             <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--accent)]">{content.hero.eyebrow}</p>
             <h1 className="max-w-3xl text-[2.9rem] leading-[0.96] md:max-w-[10.8ch] md:text-[4rem] lg:text-[4.15rem]">
               {content.hero.title}
@@ -66,7 +66,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
         </Reveal>
 
         <Reveal
-          className="page-hero-panel grid gap-5 p-6 md:p-8"
+          className="page-hero-panel panel-pad grid gap-5"
           delay={0.1}
         >
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(227,214,198,0.96))]">
@@ -86,7 +86,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
       </section>
 
       <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-        <Reveal className="space-y-5">
+        <Reveal className="stack-lg">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.approach.eyebrow}</p>
           <h2 className="max-w-xl text-4xl leading-tight md:text-5xl">{content.approach.title}</h2>
           <p className="max-w-xl text-lg leading-8 text-[color:var(--muted)]">{content.approach.body}</p>
@@ -94,7 +94,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
 
         <Reveal className="grid gap-4" delay={0.08}>
           {content.approach.points.map((point) => (
-            <div key={point} className="elevated-card rounded-[1.5rem] px-5 py-5 text-base leading-7 text-[color:var(--foreground)]">
+            <div key={point} className="elevated-card card-pad rounded-[1.5rem] text-base leading-7 text-[color:var(--foreground)]">
               {point}
             </div>
           ))}
@@ -102,7 +102,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
       </section>
 
       <section className="grid gap-6 lg:grid-cols-3">
-        <Reveal className="space-y-4 lg:col-span-1">
+        <Reveal className="stack-md lg:col-span-1">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.services.eyebrow}</p>
           <h2 className="text-4xl leading-tight md:text-5xl">{content.services.title}</h2>
           <p className="max-w-md text-lg leading-8 text-[color:var(--muted)]">{content.services.intro}</p>
@@ -112,7 +112,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
           {content.services.items.map((service, index) => (
             <Reveal
               key={service.title}
-              className="elevated-card rounded-[1.5rem] p-6"
+              className="elevated-card card-pad rounded-[1.5rem]"
               delay={index * 0.08}
             >
               <div className="mb-4 flex items-center gap-3">
@@ -128,7 +128,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
       </section>
 
       <section className="grid gap-6 lg:grid-cols-3">
-        <Reveal className="space-y-4 lg:col-span-1">
+        <Reveal className="stack-md lg:col-span-1">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.process.eyebrow}</p>
           <h2 className="text-4xl leading-tight md:text-5xl">{content.process.title}</h2>
         </Reveal>
@@ -137,7 +137,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
           {content.process.steps.map((step, index) => (
             <Reveal
               key={step.title}
-              className="elevated-card rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(240,231,220,0.88))] p-6"
+              className="elevated-card card-pad rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(240,231,220,0.88))]"
               delay={index * 0.08}
             >
               <h3 className="text-xl leading-tight">{step.title}</h3>
@@ -148,7 +148,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <Reveal className="space-y-4">
+        <Reveal className="stack-md">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.faqPreview.eyebrow}</p>
           <h2 className="text-4xl leading-tight md:text-5xl">{content.faqPreview.title}</h2>
         </Reveal>
@@ -157,7 +157,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
           {content.faqPreview.items.map((item, index) => (
             <Reveal
               key={item.question}
-              className="elevated-card rounded-[1.5rem] p-6"
+              className="elevated-card card-pad rounded-[1.5rem]"
               delay={index * 0.08}
             >
               <h3 className="text-xl leading-tight">{item.question}</h3>
@@ -170,7 +170,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
       {content.postsPreview.items.length ? (
         <section className="grid gap-8">
           <Reveal className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div className="space-y-4">
+            <div className="stack-md">
               <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.postsPreview.eyebrow}</p>
               <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.postsPreview.title}</h2>
               <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.postsPreview.intro}</p>
@@ -201,7 +201,7 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
                     />
                   </Link>
                 ) : null}
-                <div className="space-y-4 p-6">
+                <div className="stack-md card-pad">
                   <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
                     {post.category ? <span>{post.category}</span> : null}
                     {post.publishedAt ? <span>{formatPostDate(locale, post.publishedAt)}</span> : null}
@@ -228,9 +228,9 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
         </section>
       ) : null}
 
-      <section className="page-hero-panel p-8 md:p-10">
+      <section className="page-hero-panel panel-pad">
         <Reveal className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div className="space-y-4">
+          <div className="stack-md">
             <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.contact.eyebrow}</p>
             <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.contact.title}</h2>
             <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.contact.body}</p>
