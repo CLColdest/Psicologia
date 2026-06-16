@@ -59,8 +59,8 @@ export default async function AboutPage() {
           </div>
         </Reveal>
 
-        <Reveal className="elevated-card card-pad-lg rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(238,228,217,0.92))]" delay={0.08}>
-          <div className="relative aspect-square overflow-hidden rounded-[1.35rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(227,214,198,0.96))]">
+        <Reveal className="elevated-card card-pad-lg rounded-[1.75rem]" delay={0.08}>
+          <div className="relative aspect-square overflow-hidden rounded-[1.35rem] bg-white/75">
             <Image
               alt="Angela Carvajal"
               className="object-cover object-center"
@@ -93,7 +93,7 @@ export default async function AboutPage() {
             {page.testimonials.map((testimonial, index) => (
               <Reveal
                 key={`${testimonial.name}-${index}`}
-                className="elevated-card card-pad rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(238,228,217,0.92))]"
+                className="elevated-card card-pad rounded-[1.5rem]"
                 delay={index * 0.08}
               >
                 <p className="text-lg leading-8 text-[color:var(--foreground)]">“{testimonial.quote}”</p>

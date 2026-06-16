@@ -108,7 +108,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
           {content.process.steps.map((step, index) => (
             <Reveal
               key={step.title}
-              className="elevated-card card-pad rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(240,231,220,0.88))]"
+              className="elevated-card card-pad rounded-[1.5rem]"
               delay={index * 0.08}
             >
               <h3 className="text-xl leading-tight">{step.title}</h3>

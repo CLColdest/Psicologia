@@ -84,7 +84,7 @@ ul {
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 2rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.44));
+  background: rgba(255, 255, 255, 0.68);
   box-shadow: 0 24px 70px rgba(63, 42, 16, 0.08);
 }
 
@@ -108,18 +108,6 @@ ul {
 .stack-lg {
   display: grid;
   gap: 1.5rem;
-}
-
-.page-hero-panel::after {
-  content: "";
-  position: absolute;
-  inset: auto -10% -35% auto;
-  width: 18rem;
-  height: 18rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
-  filter: blur(50px);
-  pointer-events: none;
 }
 
 .elevated-card {

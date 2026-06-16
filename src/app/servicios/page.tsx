@@ -42,7 +42,7 @@ export default async function ServicesPage() {
           <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{page.intro}</p>
         </Reveal>
 
-        <Reveal className="elevated-card card-pad-lg rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(238,228,217,0.92))]" delay={0.08}>
+        <Reveal className="elevated-card card-pad-lg rounded-[1.75rem]" delay={0.08}>
           <ul className="grid gap-4">
             {page.notes.map((note) => (
               <li key={note} className="rounded-[1.25rem] border border-black/10 bg-white/65 px-5 py-4 text-base leading-7 text-[color:var(--foreground)]">
