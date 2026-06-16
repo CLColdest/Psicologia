@@ -1,0 +1,265 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Reveal } from "@/components/ui/reveal";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
+import type { Locale } from "@/lib/i18n/config";
+import { buildLocaleUrl, type PracticeSettings } from "@/lib/site";
+
+function formatPostDate(locale: Locale, value: string) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat(locale === "es" ? "es-CL" : "en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  }).format(date);
+}
+
+type HomeShellProps = {
+  locale: Locale;
+  content: Dictionary;
+  heroImageUrl?: string | null;
+  practiceSettings: PracticeSettings;
+};
+
+export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: HomeShellProps) {
+  return (
+    <main className="mx-auto flex max-w-6xl flex-col gap-20 px-6 py-10 md:gap-28 md:py-16">
+      <section className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
+        <Reveal className="space-y-6">
+          <div className="space-y-5">
+            <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--accent)]">{content.hero.eyebrow}</p>
+            <h1 className="max-w-3xl text-[2.9rem] leading-[0.96] md:max-w-[10.8ch] md:text-[4rem] lg:text-[4.15rem]">
+              {content.hero.title}
+            </h1>
+            <p className="max-w-2xl pt-4 text-lg leading-8 text-[color:color-mix(in_srgb,var(--foreground)_52%,#2f241d)] md:pt-5 md:text-[1.18rem]">
+              {content.hero.subtitle}
+            </p>
+            <p className="max-w-2xl text-[1.02rem] leading-8 text-[color:var(--muted)]">{content.hero.description}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            <Link
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[color:var(--accent)] px-6 py-3 text-sm font-semibold text-[color:var(--accent-foreground)] transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)]"
+              href={practiceSettings.whatsappUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {content.hero.primaryCta}
+            </Link>
+            <Link
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-black/10 bg-white/60 px-6 py-3 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
+              href={buildLocaleUrl(locale, content.routes.services)}
+            >
+              {content.hero.secondaryCta}
+            </Link>
+          </div>
+
+        </Reveal>
+
+        <Reveal
+          className="page-hero-panel grid gap-5 p-6 md:p-8"
+          delay={0.1}
+        >
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(227,214,198,0.96))]">
+            <Image
+              alt={locale === "es" ? "Terapeuta en consulta" : "Therapist in consultation"}
+              className="object-cover object-center"
+              fill
+              priority
+              sizes="(min-width: 1024px) 36vw, 100vw"
+              src={heroImageUrl || "/images/therapist-hero.jpg"}
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(31,25,20,0.52))] p-5 text-white">
+              <p className="text-xs uppercase tracking-[0.24em] text-white/80">{content.hero.visualCard.eyebrow}</p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <Reveal className="space-y-5">
+          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.approach.eyebrow}</p>
+          <h2 className="max-w-xl text-4xl leading-tight md:text-5xl">{content.approach.title}</h2>
+          <p className="max-w-xl text-lg leading-8 text-[color:var(--muted)]">{content.approach.body}</p>
+        </Reveal>
+
+        <Reveal className="grid gap-4" delay={0.08}>
+          {content.approach.points.map((point) => (
+            <div key={point} className="elevated-card rounded-[1.5rem] px-5 py-5 text-base leading-7 text-[color:var(--foreground)]">
+              {point}
+            </div>
+          ))}
+        </Reveal>
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-3">
+        <Reveal className="space-y-4 lg:col-span-1">
+          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.services.eyebrow}</p>
+          <h2 className="text-4xl leading-tight md:text-5xl">{content.services.title}</h2>
+          <p className="max-w-md text-lg leading-8 text-[color:var(--muted)]">{content.services.intro}</p>
+        </Reveal>
+
+        <div className="grid gap-4 lg:col-span-2">
+          {content.services.items.map((service, index) => (
+            <Reveal
+              key={service.title}
+              className="elevated-card rounded-[1.5rem] p-6"
+              delay={index * 0.08}
+            >
+              <div className="mb-4 flex items-center gap-3">
+                <span className="soft-chip flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-[color:var(--foreground)]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-2xl leading-tight">{service.title}</h3>
+              </div>
+              <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{service.description}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-3">
+        <Reveal className="space-y-4 lg:col-span-1">
+          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.process.eyebrow}</p>
+          <h2 className="text-4xl leading-tight md:text-5xl">{content.process.title}</h2>
+        </Reveal>
+
+        <div className="grid gap-4 lg:col-span-2 md:grid-cols-3">
+          {content.process.steps.map((step, index) => (
+            <Reveal
+              key={step.title}
+              className="elevated-card rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(240,231,220,0.88))] p-6"
+              delay={index * 0.08}
+            >
+              <h3 className="text-xl leading-tight">{step.title}</h3>
+              <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{step.description}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <Reveal className="space-y-4">
+          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.faqPreview.eyebrow}</p>
+          <h2 className="text-4xl leading-tight md:text-5xl">{content.faqPreview.title}</h2>
+        </Reveal>
+
+        <div className="grid gap-4">
+          {content.faqPreview.items.map((item, index) => (
+            <Reveal
+              key={item.question}
+              className="elevated-card rounded-[1.5rem] p-6"
+              delay={index * 0.08}
+            >
+              <h3 className="text-xl leading-tight">{item.question}</h3>
+              <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.answer}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {content.postsPreview.items.length ? (
+        <section className="grid gap-8">
+          <Reveal className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.postsPreview.eyebrow}</p>
+              <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.postsPreview.title}</h2>
+              <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.postsPreview.intro}</p>
+            </div>
+            <Link
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-black/10 bg-white/70 px-6 py-3 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
+              href={buildLocaleUrl(locale, "/columnas")}
+            >
+              {content.postsPreview.primaryCta}
+            </Link>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {content.postsPreview.items.map((post, index) => (
+              <Reveal
+                key={post.slug}
+                className="elevated-card overflow-hidden rounded-[1.65rem]"
+                delay={index * 0.08}
+              >
+                {post.coverImageUrl ? (
+                  <Link aria-label={post.title} className="relative block aspect-[4/3]" href={buildLocaleUrl(locale, `/columnas/${post.slug}`)}>
+                    <Image
+                      alt={post.title}
+                      className="object-cover transition duration-300 hover:scale-[1.03]"
+                      fill
+                      sizes="(min-width: 768px) 30vw, 100vw"
+                      src={post.coverImageUrl}
+                    />
+                  </Link>
+                ) : null}
+                <div className="space-y-4 p-6">
+                  <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                    {post.category ? <span>{post.category}</span> : null}
+                    {post.publishedAt ? <span>{formatPostDate(locale, post.publishedAt)}</span> : null}
+                  </div>
+                  <h3 className="text-2xl leading-tight">
+                    <Link className="transition hover:text-[color:var(--accent)]" href={buildLocaleUrl(locale, `/columnas/${post.slug}`)}>
+                      {post.title}
+                    </Link>
+                  </h3>
+                  <p className="text-base leading-7 text-[color:var(--muted)]">{post.excerpt}</p>
+                  {post.authorName ? (
+                    <p className="text-sm uppercase tracking-[0.18em] text-[color:var(--foreground)]">{post.authorName}</p>
+                  ) : null}
+                  <Link
+                    className="inline-flex text-sm font-semibold text-[color:var(--accent)] transition hover:text-[color:var(--foreground)]"
+                    href={buildLocaleUrl(locale, `/columnas/${post.slug}`)}
+                  >
+                    {content.postsPreview.readMoreLabel}
+                  </Link>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="page-hero-panel p-8 md:p-10">
+        <Reveal className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="space-y-4">
+            <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.contact.eyebrow}</p>
+            <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.contact.title}</h2>
+            <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.contact.body}</p>
+            <div className="grid gap-3 text-sm text-[color:var(--foreground)] md:grid-cols-2">
+              <span className="soft-chip rounded-[1.1rem] px-4 py-3">
+                <strong>{content.contact.whatsapp}:</strong> {practiceSettings.phoneLabel}
+              </span>
+              <span className="soft-chip rounded-[1.1rem] px-4 py-3">
+                <strong>{content.contact.email}:</strong> {practiceSettings.email}
+              </span>
+              <span className="soft-chip rounded-[1.1rem] px-4 py-3">
+                <strong>{content.contact.address}:</strong> {practiceSettings.address}
+              </span>
+              <span className="soft-chip rounded-[1.1rem] px-4 py-3">
+                <strong>{content.contact.schedule}:</strong> {practiceSettings.schedule}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center lg:justify-end">
+            <Link
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[color:var(--accent)] px-6 py-3 text-sm font-semibold text-[color:var(--accent-foreground)] transition hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(140,107,62,0.18)]"
+              href={buildLocaleUrl(locale, content.routes.contact)}
+            >
+              {content.contact.primaryCta}
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+    </main>
+  );
+}
