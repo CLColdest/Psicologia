@@ -1,6 +1,6 @@
 # History
 
-Ultima actualizacion: 2026-06-15
+Ultima actualizacion: 2026-06-16
 
 ## Objetivo del archivo
 
@@ -579,6 +579,39 @@ Resultado:
 - `typecheck` y `build` pasan
 - la home tiene un arranque mas compacto
 - `columnas` gana una presencia visual mas intencional y diferenciada
+
+### 2026-06-16 - Ajustes visuales de espaciado, detalle editorial y portabilidad
+
+Se hicieron tres mejoras operativas ligadas entre si: refinamiento visual de
+cards y contacto, ajuste de lectura en detalle de columnas y documentacion para
+continuar el proyecto desde otro PC sin perder contexto.
+
+Cambios realizados:
+- se ajustaron espaciados en cards de home, FAQ, sobre mi, servicios y contacto
+- se alineo el fondo de `input`, `select` y `textarea` con la superficie del
+  panel de contacto
+- se reorganizo el detalle de columnas para dejar en el bloque principal:
+  titulo, resumen, autora, imagen y luego cuerpo
+- se elimino la caja aislada del primer parrafo del body en columnas
+- la caja `Sobre la autora` ahora tambien muestra nombre
+- se agrego `galleryImages` al schema `post` en `Sanity`
+- se ampliaron query y tipos CMS para soportar varias imagenes por columna
+- se creo [`src/components/posts/post-image-carousel.tsx`](C:/Proyectos/Psicologia/src/components/posts/post-image-carousel.tsx)
+- el detalle de columnas ahora muestra la imagen completa sin recorte y soporta
+  carrusel horizontal
+- se creo [`SETUP-PORTABLE.md`](C:/Proyectos/Psicologia/SETUP-PORTABLE.md) con
+  el flujo para clonar, instalar, recrear `.env.local` y retomar contexto en
+  otro PC
+
+Decisiones tomadas:
+- la portabilidad del proyecto debe descansar en GitHub + `.env.local` +
+  documentacion dentro del repo, no en memoria de conversacion
+- el contexto operativo se sigue preservando en `context.md` e `history.md`
+- las columnas deben soportar piezas visuales mas ricas sin recortar imagenes
+
+Resultado:
+- `build` pasa con el soporte de galeria
+- el proyecto ya tiene una guia interna para retomarlo en cualquier otro equipo
 
 ---
 

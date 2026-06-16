@@ -1,6 +1,6 @@
 # Context
 
-Ultima actualizacion: 2026-06-15
+Ultima actualizacion: 2026-06-16
 
 ## Objetivo del archivo
 
@@ -59,6 +59,10 @@ Directriz adicional vigente:
 - La base editorial y los fallbacks visibles ahora quedaron reescritos con tono real de sitio para Angela Carvajal.
 - `Inicio` queda fijo en el header para soportar una futura animacion de secciones sin esconder el item.
 - `columnas` ya tiene una identidad mas editorial y el hero de home se ajusto para reducir aire excesivo en el titulo.
+- Se ajustaron espaciados de tarjetas, contacto e inputs para mejorar legibilidad visual.
+- El detalle de `columnas` ahora ordena mejor titulo, resumen, autora e imagen.
+- `post` ya soporta `galleryImages` y el detalle muestra carrusel con imagen completa sin recorte.
+- Existe [SETUP-PORTABLE.md](C:/Proyectos/Psicologia/SETUP-PORTABLE.md) para retomar el proyecto desde otro PC.
 
 ---
 
@@ -93,6 +97,10 @@ Directriz adicional vigente:
 - Se ordeno el modelo de contenido para reutilizar mejor `siteSettings` y reducir campos redundantes en `Sanity`.
 - Se reemplazo gran parte del copy placeholder por contenido base mas realista para Angela Carvajal.
 - Se hizo una segunda pasada visual para apretar tipografia, ajustar espaciados y reforzar el lenguaje editorial de columnas.
+- Se ajustaron espaciados internos de cards y bloques de contacto.
+- Se reorganizo el detalle de columnas para evitar duplicacion visual entre resumen y cuerpo.
+- Se agrego soporte de galeria de imagenes en columnas con carrusel horizontal.
+- Se documento el proceso de portabilidad del proyecto a otro PC en `SETUP-PORTABLE.md`.
 
 ---
 
