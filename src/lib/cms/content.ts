@@ -118,6 +118,9 @@ export type PostsPageData = {
   title?: string;
   intro?: string;
   readMoreLabel?: string;
+  sideEyebrow?: string;
+  sideBody?: string;
+  sideTopics?: string[];
 };
 
 type ServiceData = {

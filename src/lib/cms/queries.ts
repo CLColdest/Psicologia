@@ -93,7 +93,10 @@ export const postsPageQuery = groq`
     eyebrow,
     title,
     intro,
-    readMoreLabel
+    readMoreLabel,
+    sideEyebrow,
+    sideBody,
+    sideTopics
   }
 `;
 

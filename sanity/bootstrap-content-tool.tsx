@@ -55,6 +55,9 @@ type PostsPageDocument = {
   _id: string;
   intro?: string;
   title?: string;
+  sideEyebrow?: string;
+  sideBody?: string;
+  sideTopics?: string[];
 };
 
 type SiteSettingsDocument = {
@@ -236,6 +239,9 @@ const basePostsPage = {
   eyebrow: "Columnas",
   title: "Columnas para comprender mejor lo que estas viviendo.",
   intro: "Aqui encontraras articulos sobre ansiedad, relaciones, procesos personales y salud mental, escritos para orientar con claridad y cercania.",
+  sideEyebrow: "Bitacora editorial",
+  sideBody: "Reflexiones breves y articulos para acompanar preguntas sobre ansiedad, vinculos, duelo, autocuidado y procesos personales.",
+  sideTopics: ["Reflexiones clinicas", "Ansiedad, vinculos y procesos personales"],
   readMoreLabel: "Leer columna"
 };
 
@@ -477,7 +483,7 @@ function BootstrapContentPane() {
         client.fetch<ServicesPageDocument | null>(
           '*[_type == "servicesPage" && language == "es"][0]{_id, intro, notes, closingTitle, closingBody}'
         ),
-        client.fetch<PostsPageDocument | null>('*[_type == "postsPage" && language == "es"][0]{_id, title, intro}')
+        client.fetch<PostsPageDocument | null>('*[_type == "postsPage" && language == "es"][0]{_id, title, intro, sideEyebrow, sideBody, sideTopics}')
       ]);
 
       const transaction = client.transaction();
@@ -634,6 +640,16 @@ function BootstrapContentPane() {
           let nextPatch = patch.setIfMissing(basePostsPage);
           if (Object.keys(legacyPostsUpdates).length) {
             nextPatch = nextPatch.set(legacyPostsUpdates);
+          }
+          if (
+            sameStringArray(postsPage.sideTopics, ["2 articulos", "Lectura serena"]) ||
+            sameStringArray(postsPage.sideTopics, ["Clinical reflections", "Anxiety, relationships, and personal processes"]) === false
+          ) {
+            nextPatch = nextPatch.setIfMissing({
+              sideEyebrow: basePostsPage.sideEyebrow,
+              sideBody: basePostsPage.sideBody,
+              sideTopics: basePostsPage.sideTopics
+            });
           }
           return nextPatch;
         });

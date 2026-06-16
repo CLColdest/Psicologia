@@ -37,13 +37,19 @@ const content = {
     eyebrow: "Columnas",
     title: "Columnas para comprender mejor lo que estas viviendo.",
     intro: "Aqui encontraras articulos sobre ansiedad, relaciones, procesos personales y salud mental, escritos para orientar con claridad y cercania.",
-    readMoreLabel: "Leer columna"
+    readMoreLabel: "Leer columna",
+    sideEyebrow: "Bitacora editorial",
+    sideBody: "Reflexiones breves y articulos para acompanar preguntas sobre ansiedad, vinculos, duelo, autocuidado y procesos personales.",
+    sideTopics: ["Reflexiones clinicas", "Ansiedad, vinculos y procesos personales"]
   },
   en: {
     eyebrow: "Articles",
     title: "Articles to better understand what you may be going through.",
     intro: "Here you will find writing on anxiety, relationships, personal processes, and mental health, developed to offer clarity, orientation, and thoughtful reflection.",
-    readMoreLabel: "Read article"
+    readMoreLabel: "Read article",
+    sideEyebrow: "Editorial notebook",
+    sideBody: "Short reflections and articles to support questions about anxiety, relationships, grief, self-care, and personal processes.",
+    sideTopics: ["Clinical reflections", "Anxiety, relationships, and personal processes"]
   }
 } as const;
 
@@ -60,7 +66,10 @@ export default async function PostsPage({ params }: PostsPageProps) {
     eyebrow: postsPage?.eyebrow || fallback.eyebrow,
     title: postsPage?.title || fallback.title,
     intro: postsPage?.intro || fallback.intro,
-    readMoreLabel: postsPage?.readMoreLabel || fallback.readMoreLabel
+    readMoreLabel: postsPage?.readMoreLabel || fallback.readMoreLabel,
+    sideEyebrow: postsPage?.sideEyebrow || fallback.sideEyebrow,
+    sideBody: postsPage?.sideBody || fallback.sideBody,
+    sideTopics: postsPage?.sideTopics?.length ? postsPage.sideTopics : fallback.sideTopics
   };
 
   return (
@@ -73,17 +82,14 @@ export default async function PostsPage({ params }: PostsPageProps) {
         </Reveal>
 
         <Reveal className="elevated-card card-pad-lg grid gap-4 rounded-[1.7rem]" delay={0.08}>
-          <p className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            {locale === "es" ? "Bitacora editorial" : "Editorial notebook"}
-          </p>
-          <p className="text-lg leading-8 text-[color:var(--foreground)]">
-            {locale === "es"
-              ? "Reflexiones breves y articulos para acompanar preguntas sobre ansiedad, vinculos, duelo, autocuidado y procesos personales."
-              : "Short reflections and articles to support questions about anxiety, relationships, grief, self-care, and personal processes."}
-          </p>
+          <p className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">{page.sideEyebrow}</p>
+          <p className="text-lg leading-8 text-[color:var(--foreground)]">{page.sideBody}</p>
           <div className="flex min-h-20 flex-wrap items-center justify-center gap-2 text-sm text-[color:var(--foreground)] md:justify-start">
-            <span className="soft-chip inline-flex items-center rounded-full px-4 py-2">{locale === "es" ? "Reflexiones clinicas" : "Clinical reflections"}</span>
-            <span className="soft-chip inline-flex items-center rounded-full px-4 py-2">{locale === "es" ? "Ansiedad, vinculos y procesos personales" : "Anxiety, relationships, and personal processes"}</span>
+            {page.sideTopics.map((topic) => (
+              <span key={topic} className="soft-chip inline-flex items-center rounded-full px-4 py-2">
+                {topic}
+              </span>
+            ))}
           </div>
         </Reveal>
       </section>
