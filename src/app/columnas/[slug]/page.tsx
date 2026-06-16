@@ -40,14 +40,16 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-12 px-6 py-12 md:gap-16 md:py-20">
       <section className="page-hero-panel panel-pad stack-lg">
-        <Reveal className="space-y-6">
+        <Reveal className="stack-lg">
           <p className="editorial-label">Columna</p>
           <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
             {post.categories?.[0] ? <span>{post.categories[0]}</span> : null}
             {post.publishedAt ? <span>{formatPostDate(post.publishedAt)}</span> : null}
           </div>
-          <h1 className="text-5xl leading-[0.96] md:text-7xl">{post.title}</h1>
-          {post.excerpt ? <p className="text-xl leading-9 text-[color:var(--muted)]">{post.excerpt}</p> : null}
+          <div className="stack-card-copy">
+            <h1 className="text-5xl leading-[0.96] md:text-7xl">{post.title}</h1>
+            {post.excerpt ? <p className="text-xl leading-9 text-[color:var(--muted)]">{post.excerpt}</p> : null}
+          </div>
           {post.authorName ? <p className="text-sm uppercase tracking-[0.22em] text-[color:var(--foreground)]">{post.authorName}</p> : null}
         </Reveal>
 
@@ -63,20 +65,25 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
             />
           </Reveal>
         ) : null}
+
+        {body.length ? (
+          <section className="article-prose">
+            {body.map((paragraph, index) => (
+              <Reveal key={index} delay={index * 0.04}>
+                <p className="max-w-none">{paragraph}</p>
+              </Reveal>
+            ))}
+          </section>
+        ) : null}
       </section>
 
-      <section className="article-prose">
-        {body.map((paragraph, index) => (
-          <Reveal key={index} className={index === 0 ? "elevated-card rounded-[1.75rem] card-pad-lg" : ""} delay={index * 0.04}>
-            <p className="max-w-none">{paragraph}</p>
-          </Reveal>
-        ))}
-      </section>
-
-      {post.authorBio ? (
+      {post.authorBio || post.authorName ? (
         <Reveal className="elevated-card card-pad-lg rounded-[1.75rem]">
-          <p className="text-sm uppercase tracking-[0.22em] text-[color:var(--accent)]">Sobre la autora</p>
-          <p className="mt-4 text-base leading-8 text-[color:var(--muted)]">{post.authorBio}</p>
+          <div className="stack-card-copy">
+            <p className="text-sm uppercase tracking-[0.22em] text-[color:var(--accent)]">Sobre la autora</p>
+            {post.authorName ? <h2 className="text-2xl leading-tight">{post.authorName}</h2> : null}
+            {post.authorBio ? <p className="text-base leading-8 text-[color:var(--muted)]">{post.authorBio}</p> : null}
+          </div>
         </Reveal>
       ) : null}
     </main>
