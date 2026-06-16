@@ -72,7 +72,6 @@ type AboutPageData = {
   eyebrow?: string;
   title?: string;
   intro?: string;
-  highlights?: string[];
   biography?: Array<{ _type?: string; children?: Array<{ text?: string }> }>;
   biographyTitle?: string;
   approach?: Array<{ _type?: string; children?: Array<{ text?: string }> }>;
@@ -403,7 +402,6 @@ export function mapAboutContent(
     title: string;
     intro: string;
     sections: readonly { title: string; body: string }[];
-    highlights: readonly string[];
     testimonialsTitle: string;
     testimonials: readonly { name: string; quote: string }[];
     primaryCta: string;
@@ -422,7 +420,6 @@ export function mapAboutContent(
     eyebrow: data?.eyebrow || fallback.eyebrow,
     title: data?.title || fallback.title,
     intro: data?.intro || fallback.intro,
-    highlights: data?.highlights?.length ? data.highlights : fallback.highlights,
     testimonialsTitle: data?.testimonialsTitle || fallback.testimonialsTitle,
     primaryCta: data?.primaryCta || fallback.primaryCta,
     secondaryCta: data?.secondaryCta || fallback.secondaryCta,

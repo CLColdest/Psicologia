@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/ui/reveal";
@@ -29,7 +30,6 @@ const content = {
         body: "Aqui se integran antecedentes de formacion, experiencia clinica, diplomados, cursos y areas de especializacion para que quien consulta pueda conocer mejor el sustento profesional del proceso."
       }
     ],
-    highlights: ["Atencion online y presencial", "Trabajo con adultos, adolescentes y parejas", "Un enfoque claro, humano y profesional"],
     testimonialsTitle: "Testimonios",
     testimonials: [],
     primaryCta: "Agendar por WhatsApp",
@@ -54,7 +54,6 @@ const content = {
         body: "This space brings together academic training, clinical experience, further study, and areas of specialization so visitors can understand the professional foundation behind the process."
       }
     ],
-    highlights: ["Online and in-person care", "Work with adults, teens, and couples", "A clear, human, and professional approach"],
     testimonialsTitle: "Testimonials",
     testimonials: [],
     primaryCta: "Book on WhatsApp",
@@ -73,7 +72,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-12 md:gap-24 md:py-20">
-      <section className="page-hero-panel panel-pad grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+      <section className="page-hero-panel panel-pad grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <Reveal className="stack-lg">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{page.eyebrow}</p>
           <h1 className="max-w-4xl text-5xl leading-[0.94] md:text-7xl">{page.title}</h1>
@@ -98,13 +97,19 @@ export default async function AboutPage({ params }: AboutPageProps) {
           className="elevated-card card-pad-lg rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(238,228,217,0.92))]"
           delay={0.08}
         >
-          <ul className="grid gap-4">
-            {page.highlights.map((item) => (
-              <li key={item} className="rounded-[1.25rem] border border-black/10 bg-white/65 px-5 py-4 text-base leading-7 text-[color:var(--foreground)]">
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div>
+            <div className="relative aspect-square overflow-hidden rounded-[1.35rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(227,214,198,0.96))]">
+              <Image
+                alt={locale === "es" ? "Angela Carvajal" : "Angela Carvajal"}
+                className="object-cover object-center"
+                fill
+                priority
+                sizes="(min-width: 1024px) 34vw, 100vw"
+                src="/images/therapist-hero.jpg"
+              />
+            </div>
+
+          </div>
         </Reveal>
       </section>
 

@@ -18,7 +18,6 @@ type PortableTextBlock = {
 type AboutPageDocument = {
   _id: string;
   intro?: string;
-  highlights?: string[];
   biographyTitle?: string;
   approachTitle?: string;
   experienceTitle?: string;
@@ -148,7 +147,6 @@ const baseAboutPage = {
   eyebrow: "Sobre mi",
   title: "Un espacio terapeutico sostenido por presencia, criterio y escucha.",
   intro: "Soy Angela Carvajal y acompano procesos psicoterapeuticos desde una mirada cercana, respetuosa y clinicamente cuidadosa. Me interesa ofrecer un espacio donde puedas comprender lo que estas viviendo y avanzar con mas claridad.",
-  highlights: ["Atencion online y presencial", "Trabajo con adultos, adolescentes y parejas", "Un enfoque claro, humano y profesional"],
   biography: [
     {
       _key: "biografia-base",
@@ -472,7 +470,7 @@ function BootstrapContentPane() {
           '*[_type == "homePage" && language == "es"][0]{_id, heroDescription, approachBody, approachPoints, servicesIntro, postsIntro, contactTitle, contactBody}'
         ),
         client.fetch<AboutPageDocument | null>(
-          '*[_type == "aboutPage" && language == "es"][0]{_id, intro, highlights, biographyTitle, approachTitle, experienceTitle, biography, approach, experience}'
+          '*[_type == "aboutPage" && language == "es"][0]{_id, intro, biographyTitle, approachTitle, experienceTitle, biography, approach, experience}'
         ),
         client.fetch<ContactPageDocument | null>('*[_type == "contactPage" && language == "es"][0]{_id, closingBody}'),
         client.fetch<ServicesPageDocument | null>(
@@ -556,9 +554,6 @@ function BootstrapContentPane() {
         transaction.patch(aboutPage._id, (patch) =>
           {
             let nextPatch = patch.setIfMissing(baseAboutPage);
-            if (sameStringArray(aboutPage.highlights, ["Narrativa humana y profesional", "Credenciales visibles", "Base editable desde CMS"])) {
-              nextPatch = nextPatch.set({ highlights: baseAboutPage.highlights });
-            }
             if (Object.keys(legacyAboutUpdates).length) {
               nextPatch = nextPatch.set(legacyAboutUpdates);
             }

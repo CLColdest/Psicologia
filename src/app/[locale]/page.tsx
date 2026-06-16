@@ -20,5 +20,5 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
   const content = mergeHomeDictionary(fallback, cms);
   const practiceSettings = mergePracticeSettings(siteSettings);
 
-  return <HomeShell content={content} heroImageUrl={cms.homePage?.heroImageUrl} locale={locale} practiceSettings={practiceSettings} />;
+  return <HomeShell content={content} locale={locale} practiceSettings={practiceSettings} />;
 }

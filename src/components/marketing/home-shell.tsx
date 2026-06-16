@@ -26,15 +26,14 @@ function formatPostDate(locale: Locale, value: string) {
 type HomeShellProps = {
   locale: Locale;
   content: Dictionary;
-  heroImageUrl?: string | null;
   practiceSettings: PracticeSettings;
 };
 
-export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: HomeShellProps) {
+export function HomeShell({ locale, content, practiceSettings }: HomeShellProps) {
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-20 px-6 py-10 md:gap-28 md:py-16">
-      <section className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
-        <Reveal className="stack-lg">
+      <section>
+        <Reveal className="stack-lg max-w-3xl">
           <div className="stack-lg">
             <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--accent)]">{content.hero.eyebrow}</p>
             <h1 className="max-w-3xl text-[2.9rem] leading-[0.96] md:max-w-[10.8ch] md:text-[4rem] lg:text-[4.15rem]">
@@ -63,25 +62,6 @@ export function HomeShell({ locale, content, heroImageUrl, practiceSettings }: H
             </Link>
           </div>
 
-        </Reveal>
-
-        <Reveal
-          className="page-hero-panel panel-pad grid gap-5"
-          delay={0.1}
-        >
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(227,214,198,0.96))]">
-            <Image
-              alt={locale === "es" ? "Terapeuta en consulta" : "Therapist in consultation"}
-              className="object-cover object-center"
-              fill
-              priority
-              sizes="(min-width: 1024px) 36vw, 100vw"
-              src={heroImageUrl || "/images/therapist-hero.jpg"}
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(31,25,20,0.52))] p-5 text-white">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/80">{content.hero.visualCard.eyebrow}</p>
-            </div>
-          </div>
         </Reveal>
       </section>
 

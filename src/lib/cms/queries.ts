@@ -66,7 +66,6 @@ export const aboutPageQuery = groq`
     eyebrow,
     title,
     intro,
-    highlights,
     biography,
     biographyTitle,
     approach,
