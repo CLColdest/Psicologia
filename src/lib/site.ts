@@ -69,12 +69,54 @@ export function buildWhatsappUrl(number: string, message = "Hola, quisiera consu
   return `https://wa.me/${normalizedNumber}?text=${encodeURIComponent(message)}`;
 }
 
+function parseHexColor(value: string) {
+  const normalized = value.trim().replace("#", "");
+
+  if (!/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/.test(normalized)) {
+    return null;
+  }
+
+  const expanded =
+    normalized.length === 3
+      ? normalized
+          .split("")
+          .map((char) => `${char}${char}`)
+          .join("")
+      : normalized;
+
+  const red = Number.parseInt(expanded.slice(0, 2), 16);
+  const green = Number.parseInt(expanded.slice(2, 4), 16);
+  const blue = Number.parseInt(expanded.slice(4, 6), 16);
+
+  return { red, green, blue };
+}
+
+function toLinearChannel(value: number) {
+  const normalized = value / 255;
+  return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+}
+
+export function getContrastTextColor(backgroundColor: string, darkTextColor: string, lightTextColor = "#FFFFFF") {
+  const rgb = parseHexColor(backgroundColor);
+
+  if (!rgb) {
+    return darkTextColor;
+  }
+
+  const luminance =
+    0.2126 * toLinearChannel(rgb.red) +
+    0.7152 * toLinearChannel(rgb.green) +
+    0.0722 * toLinearChannel(rgb.blue);
+
+  return luminance < 0.45 ? lightTextColor : darkTextColor;
+}
+
 export const defaultThemeSettings: ThemeSettings = {
   backgroundColor: "#FAF7F2",
   foregroundColor: "#8B8580",
   mutedColor: "#8B8580",
   accentColor: "#B9C8B1",
-  accentForegroundColor: "#8B8580",
+  accentForegroundColor: getContrastTextColor("#B9C8B1", "#8B8580"),
   surfaceColor: "rgba(250, 247, 242, 0.92)",
   surfaceStrongColor: "#E6C9C9"
 };

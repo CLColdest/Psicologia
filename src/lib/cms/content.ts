@@ -5,6 +5,7 @@ import {
   defaultPracticeSettings,
   defaultThemeSettings,
   defaultUiLabels,
+  getContrastTextColor,
   type PracticeSettings,
   type SocialLinkSettings,
   type ThemeSettings,
@@ -200,13 +201,14 @@ export function mergePracticeSettings(data: SiteSettingsData | null | undefined)
 
 export function mergeThemeSettings(data: SiteSettingsData | null | undefined): ThemeSettings {
   const foregroundColor = data?.foregroundColor || defaultThemeSettings.foregroundColor;
+  const accentColor = data?.accentColor || defaultThemeSettings.accentColor;
 
   return {
     backgroundColor: data?.backgroundColor || defaultThemeSettings.backgroundColor,
     foregroundColor,
     mutedColor: foregroundColor,
-    accentColor: data?.accentColor || defaultThemeSettings.accentColor,
-    accentForegroundColor: foregroundColor,
+    accentColor,
+    accentForegroundColor: getContrastTextColor(accentColor, foregroundColor),
     surfaceColor: data?.surfaceColor || defaultThemeSettings.surfaceColor,
     surfaceStrongColor: data?.surfaceStrongColor || defaultThemeSettings.surfaceStrongColor
   };
