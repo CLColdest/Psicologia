@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
+import { PostImageCarousel } from "@/components/posts/post-image-carousel";
 import { Reveal } from "@/components/ui/reveal";
 import { getPostBySlug, getPostSlugs } from "@/lib/cms/content";
 import { portableTextToPlainText } from "@/lib/cms/portable-text";
@@ -36,6 +36,10 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
   }
 
   const body = portableTextToPlainText(post.body).split("\n\n").filter(Boolean);
+  const images = [post.coverImage, ...(post.galleryImages || [])].filter(
+    (image, index, collection): image is NonNullable<(typeof collection)[number]> =>
+      Boolean(image?.url) && collection.findIndex((candidate) => candidate?.url === image?.url) === index
+  );
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-12 px-6 py-12 md:gap-16 md:py-20">
@@ -53,16 +57,9 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
           {post.authorName ? <p className="text-sm uppercase tracking-[0.22em] text-[color:var(--foreground)]">{post.authorName}</p> : null}
         </Reveal>
 
-        {post.coverImageUrl ? (
-          <Reveal className="relative aspect-[16/9] overflow-hidden rounded-[1.9rem] border border-black/10">
-            <Image
-              alt={post.title || ""}
-              className="object-cover"
-              fill
-              priority
-              sizes="(min-width: 1024px) 70vw, 100vw"
-              src={post.coverImageUrl}
-            />
+        {images.length ? (
+          <Reveal>
+            <PostImageCarousel images={images} title={post.title || "Columna"} />
           </Reveal>
         ) : null}
 

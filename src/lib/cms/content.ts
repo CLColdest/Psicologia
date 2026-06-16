@@ -144,11 +144,20 @@ export type PostCardData = {
   authorName?: string;
 };
 
+export type PostImageData = {
+  url: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+};
+
 export type PostDetailData = {
   title?: string;
   excerpt?: string;
   slug?: string;
   coverImageUrl?: string;
+  coverImage?: PostImageData;
+  galleryImages?: PostImageData[];
   categories?: string[];
   publishedAt?: string;
   body?: Array<{ _type?: string; children?: Array<{ text?: string }> }>;

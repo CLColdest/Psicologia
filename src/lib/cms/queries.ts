@@ -183,6 +183,20 @@ export const postBySlugQuery = groq`
     excerpt,
     "slug": slug.current,
     "coverImageUrl": coverImage.asset->url,
+    "coverImage": select(
+      defined(coverImage.asset) => {
+        "url": coverImage.asset->url,
+        "width": coverImage.asset->metadata.dimensions.width,
+        "height": coverImage.asset->metadata.dimensions.height,
+        "alt": coalesce(coverImage.alt, title)
+      }
+    ),
+    "galleryImages": galleryImages[]{
+      "url": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height,
+      "alt": coalesce(alt, ^.title)
+    },
     categories,
     publishedAt,
     body,

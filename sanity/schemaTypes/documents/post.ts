@@ -10,6 +10,13 @@ export const postType = defineType({
     defineField({ name: "excerpt", title: "Resumen corto", type: "text", rows: 3 }),
     defineField({ name: "coverImage", title: "Imagen principal", type: "image", options: { hotspot: true } }),
     defineField({
+      name: "galleryImages",
+      title: "Galeria de imagenes",
+      description: "Imagenes adicionales para mostrar la columna como carrusel horizontal.",
+      type: "array",
+      of: [defineArrayMember({ type: "image", options: { hotspot: true } })]
+    }),
+    defineField({
       name: "author",
       title: "Autora",
       type: "reference",
