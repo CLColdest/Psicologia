@@ -69,26 +69,39 @@ export function buildWhatsappUrl(number: string, message = "Hola, quisiera consu
   return `https://wa.me/${normalizedNumber}?text=${encodeURIComponent(message)}`;
 }
 
-function parseHexColor(value: string) {
-  const normalized = value.trim().replace("#", "");
+function parseColor(value: string) {
+  const trimmed = value.trim();
+  const hex = trimmed.replace("#", "");
 
-  if (!/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/.test(normalized)) {
-    return null;
+  if (/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/.test(hex)) {
+    const expanded =
+      hex.length === 3
+        ? hex
+            .split("")
+            .map((char) => `${char}${char}`)
+            .join("")
+        : hex;
+
+    return {
+      red: Number.parseInt(expanded.slice(0, 2), 16),
+      green: Number.parseInt(expanded.slice(2, 4), 16),
+      blue: Number.parseInt(expanded.slice(4, 6), 16)
+    };
   }
 
-  const expanded =
-    normalized.length === 3
-      ? normalized
-          .split("")
-          .map((char) => `${char}${char}`)
-          .join("")
-      : normalized;
+  const rgbMatch = trimmed.match(
+    /^rgba?\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})(?:\s*,\s*(?:0|1|0?\.\d+))?\s*\)$/i
+  );
 
-  const red = Number.parseInt(expanded.slice(0, 2), 16);
-  const green = Number.parseInt(expanded.slice(2, 4), 16);
-  const blue = Number.parseInt(expanded.slice(4, 6), 16);
+  if (rgbMatch) {
+    return {
+      red: Math.min(255, Number.parseInt(rgbMatch[1], 10)),
+      green: Math.min(255, Number.parseInt(rgbMatch[2], 10)),
+      blue: Math.min(255, Number.parseInt(rgbMatch[3], 10))
+    };
+  }
 
-  return { red, green, blue };
+  return null;
 }
 
 function toLinearChannel(value: number) {
@@ -113,9 +126,9 @@ function getContrastRatio(a: { red: number; green: number; blue: number }, b: { 
 }
 
 export function getContrastTextColor(backgroundColor: string, darkTextColor: string, lightTextColor = "#FFFFFF") {
-  const background = parseHexColor(backgroundColor);
-  const dark = parseHexColor(darkTextColor);
-  const light = parseHexColor(lightTextColor);
+  const background = parseColor(backgroundColor);
+  const dark = parseColor(darkTextColor);
+  const light = parseColor(lightTextColor);
 
   if (!background || !dark || !light) {
     return darkTextColor;
