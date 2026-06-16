@@ -15,6 +15,7 @@ export const aboutPageType = defineType({
     defineField({ name: "eyebrow", title: "Sobrelinea", type: "string" }),
     defineField({ name: "title", title: "Titulo", type: "string", validation: (rule) => rule.required() }),
     defineField({ name: "intro", title: "Introduccion", type: "text", rows: 3 }),
+    defineField({ name: "mainImage", title: "Imagen principal", type: "image", options: { hotspot: true } }),
     defineField({ name: "biography", title: "Biografia", type: "array", of: [{ type: "block" }] }),
     defineField({ name: "biographyTitle", title: "Titulo de biografia", type: "string" }),
     defineField({ name: "approach", title: "Enfoque terapeutico", type: "array", of: [{ type: "block" }] }),
@@ -28,7 +29,8 @@ export const aboutPageType = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "language"
+      subtitle: "language",
+      media: "mainImage"
     }
   }
 });

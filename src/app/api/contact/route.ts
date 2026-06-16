@@ -66,7 +66,6 @@ export async function POST(request: Request) {
     }
 
     const html = `
-      <h2>Nuevo contacto</h2>
       <p><strong>Nombre:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Telefono:</strong> ${phone || "-"}</p>
@@ -86,7 +85,7 @@ export async function POST(request: Request) {
         from: "Contacto Web <onboarding@resend.dev>",
         to: [contactToEmail],
         reply_to: email,
-        subject: locale === "es" ? `Nuevo contacto de ${name}` : `New contact from ${name}`,
+        subject: locale === "es" ? `Solicitud de contacto de ${name}` : `Contact request from ${name}`,
         html
       })
     });

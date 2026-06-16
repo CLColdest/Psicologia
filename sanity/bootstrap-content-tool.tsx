@@ -18,6 +18,7 @@ type PortableTextBlock = {
 type AboutPageDocument = {
   _id: string;
   intro?: string;
+  mainImage?: { asset?: { _ref?: string } };
   biographyTitle?: string;
   approachTitle?: string;
   experienceTitle?: string;
@@ -113,7 +114,6 @@ const baseHomePage = {
   heroDescription: "Angela Carvajal acompana procesos de ansiedad, crisis vitales, duelo, autoestima, vinculos y malestar emocional desde una mirada calida, profesional y respetuosa.",
   heroPrimaryCta: "Escribir por WhatsApp",
   heroSecondaryCta: "Ver servicios",
-  heroVisualEyebrow: "Angela Carvajal",
   approachEyebrow: "Enfoque",
   approachTitle: "Un proceso terapeutico claro, humano y sin sobrecarga.",
   approachBody: "La propuesta de trabajo busca ofrecer un espacio de escucha y elaboracion para comprender lo que te ocurre, fortalecer recursos personales y avanzar con mayor claridad en momentos de dificultad.",
@@ -147,6 +147,7 @@ const baseAboutPage = {
   eyebrow: "Sobre mi",
   title: "Un espacio terapeutico sostenido por presencia, criterio y escucha.",
   intro: "Soy Angela Carvajal y acompano procesos psicoterapeuticos desde una mirada cercana, respetuosa y clinicamente cuidadosa. Me interesa ofrecer un espacio donde puedas comprender lo que estas viviendo y avanzar con mas claridad.",
+  mainImage: undefined,
   biography: [
     {
       _key: "biografia-base",
@@ -470,7 +471,7 @@ function BootstrapContentPane() {
           '*[_type == "homePage" && language == "es"][0]{_id, heroDescription, approachBody, approachPoints, servicesIntro, postsIntro, contactTitle, contactBody}'
         ),
         client.fetch<AboutPageDocument | null>(
-          '*[_type == "aboutPage" && language == "es"][0]{_id, intro, biographyTitle, approachTitle, experienceTitle, biography, approach, experience}'
+          '*[_type == "aboutPage" && language == "es"][0]{_id, intro, mainImage, biographyTitle, approachTitle, experienceTitle, biography, approach, experience}'
         ),
         client.fetch<ContactPageDocument | null>('*[_type == "contactPage" && language == "es"][0]{_id, closingBody}'),
         client.fetch<ServicesPageDocument | null>(

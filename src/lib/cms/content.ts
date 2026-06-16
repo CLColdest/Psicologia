@@ -38,8 +38,6 @@ type HomePageData = {
   heroDescription?: string;
   heroPrimaryCta?: string;
   heroSecondaryCta?: string;
-  heroVisualEyebrow?: string;
-  heroImageUrl?: string;
   approachEyebrow?: string;
   approachTitle?: string;
   approachBody?: string;
@@ -72,6 +70,7 @@ type AboutPageData = {
   eyebrow?: string;
   title?: string;
   intro?: string;
+  mainImageUrl?: string;
   biography?: Array<{ _type?: string; children?: Array<{ text?: string }> }>;
   biographyTitle?: string;
   approach?: Array<{ _type?: string; children?: Array<{ text?: string }> }>;
@@ -320,11 +319,7 @@ export function mergeHomeDictionary(
       subtitle: homePage?.heroSubtitle || fallback.hero.subtitle,
       description: homePage?.heroDescription || fallback.hero.description,
       primaryCta: homePage?.heroPrimaryCta || fallback.hero.primaryCta,
-      secondaryCta: homePage?.heroSecondaryCta || fallback.hero.secondaryCta,
-      visualCard: {
-        ...fallback.hero.visualCard,
-        eyebrow: homePage?.heroVisualEyebrow || fallback.hero.visualCard.eyebrow
-      }
+      secondaryCta: homePage?.heroSecondaryCta || fallback.hero.secondaryCta
     },
     approach: {
       ...fallback.approach,
@@ -401,6 +396,7 @@ export function mapAboutContent(
     eyebrow: string;
     title: string;
     intro: string;
+    mainImageUrl?: string;
     sections: readonly { title: string; body: string }[];
     testimonialsTitle: string;
     testimonials: readonly { name: string; quote: string }[];
@@ -420,6 +416,7 @@ export function mapAboutContent(
     eyebrow: data?.eyebrow || fallback.eyebrow,
     title: data?.title || fallback.title,
     intro: data?.intro || fallback.intro,
+    mainImageUrl: data?.mainImageUrl || fallback.mainImageUrl,
     testimonialsTitle: data?.testimonialsTitle || fallback.testimonialsTitle,
     primaryCta: data?.primaryCta || fallback.primaryCta,
     secondaryCta: data?.secondaryCta || fallback.secondaryCta,

@@ -16,6 +16,7 @@ const content = {
     title: "Una psicoterapia sostenida por presencia, criterio y escucha.",
     intro:
       "Soy Angela Carvajal y acompano procesos psicoterapeuticos desde una mirada cercana, respetuosa y clinicamente cuidadosa. Este espacio busca mostrar con claridad mi forma de trabajar y el tipo de acompanamiento que ofrezco.",
+    mainImageUrl: "/images/therapist-hero.jpg",
     sections: [
       {
         title: "Trayectoria y trabajo clinico",
@@ -40,6 +41,7 @@ const content = {
     title: "A therapeutic space held with presence, care, and clinical clarity.",
     intro:
       "I am Angela Carvajal, and I support psychotherapy processes through a warm, respectful, and clinically grounded approach. This page offers a clearer sense of how I work and the kind of support I provide.",
+    mainImageUrl: "/images/therapist-hero.jpg",
     sections: [
       {
         title: "Clinical path and professional focus",
@@ -105,7 +107,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                 fill
                 priority
                 sizes="(min-width: 1024px) 34vw, 100vw"
-                src="/images/therapist-hero.jpg"
+                src={page.mainImageUrl || "/images/therapist-hero.jpg"}
               />
             </div>
 

@@ -18,8 +18,6 @@ export const homePageType = defineType({
     defineField({ name: "heroDescription", title: "Descripcion", type: "text", rows: 3 }),
     defineField({ name: "heroPrimaryCta", title: "CTA principal del hero", type: "string" }),
     defineField({ name: "heroSecondaryCta", title: "CTA secundario del hero", type: "string" }),
-    defineField({ name: "heroVisualEyebrow", title: "Sobrelinea de imagen hero", type: "string" }),
-    defineField({ name: "heroImage", title: "Imagen principal", type: "image", options: { hotspot: true } }),
     defineField({ name: "approachEyebrow", title: "Sobrelinea de enfoque", type: "string" }),
     defineField({ name: "approachTitle", title: "Titulo de enfoque", type: "string" }),
     defineField({ name: "approachBody", title: "Texto de enfoque", type: "text", rows: 4 }),
@@ -69,8 +67,7 @@ export const homePageType = defineType({
   preview: {
     select: {
       title: "heroTitle",
-      subtitle: "language",
-      media: "heroImage"
+      subtitle: "language"
     }
   }
 });
