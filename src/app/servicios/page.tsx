@@ -37,7 +37,7 @@ export default async function ServicesPage() {
     <main className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-12 md:gap-24 md:py-20">
       <section className="page-hero-panel panel-pad grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
         <Reveal className="stack-lg">
-          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{page.eyebrow}</p>
+          <p className="editorial-label">{page.eyebrow}</p>
           <h1 className="max-w-4xl text-5xl leading-[0.94] md:text-7xl">{page.title}</h1>
           <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{page.intro}</p>
         </Reveal>

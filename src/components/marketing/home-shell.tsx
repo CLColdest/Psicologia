@@ -33,7 +33,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
       <section>
         <Reveal className="stack-lg max-w-3xl">
           <div className="stack-lg">
-            <p className="text-xs uppercase tracking-[0.28em] text-[color:var(--accent)]">{content.hero.eyebrow}</p>
+            <p className="editorial-label">{content.hero.eyebrow}</p>
             <h1 className="max-w-3xl text-[2.9rem] leading-[0.96] md:max-w-[10.8ch] md:text-[4rem] lg:text-[4.15rem]">{content.hero.title}</h1>
             <p className="max-w-2xl pt-4 text-lg leading-8 text-[color:color-mix(in_srgb,var(--foreground)_52%,#2f241d)] md:pt-5 md:text-[1.18rem]">
               {content.hero.subtitle}
@@ -62,7 +62,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
 
       <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
         <Reveal className="stack-lg">
-          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.approach.eyebrow}</p>
+          <p className="editorial-label">{content.approach.eyebrow}</p>
           <h2 className="max-w-xl text-4xl leading-tight md:text-5xl">{content.approach.title}</h2>
           <p className="max-w-xl text-lg leading-8 text-[color:var(--muted)]">{content.approach.body}</p>
         </Reveal>
@@ -78,7 +78,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
 
       <section className="grid gap-6 lg:grid-cols-3">
         <Reveal className="stack-md lg:col-span-1">
-          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.services.eyebrow}</p>
+          <p className="editorial-label">{content.services.eyebrow}</p>
           <h2 className="text-4xl leading-tight md:text-5xl">{content.services.title}</h2>
           <p className="max-w-md text-lg leading-8 text-[color:var(--muted)]">{content.services.intro}</p>
         </Reveal>
@@ -100,7 +100,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
 
       <section className="grid gap-6 lg:grid-cols-3">
         <Reveal className="stack-md lg:col-span-1">
-          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.process.eyebrow}</p>
+          <p className="editorial-label">{content.process.eyebrow}</p>
           <h2 className="text-4xl leading-tight md:text-5xl">{content.process.title}</h2>
         </Reveal>
 
@@ -120,7 +120,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
 
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal className="stack-md">
-          <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.faqPreview.eyebrow}</p>
+          <p className="editorial-label">{content.faqPreview.eyebrow}</p>
           <h2 className="text-4xl leading-tight md:text-5xl">{content.faqPreview.title}</h2>
         </Reveal>
 
@@ -138,7 +138,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
         <section className="grid gap-8">
           <Reveal className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="stack-md">
-              <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.postsPreview.eyebrow}</p>
+              <p className="editorial-label">{content.postsPreview.eyebrow}</p>
               <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.postsPreview.title}</h2>
               <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.postsPreview.intro}</p>
             </div>
@@ -189,7 +189,7 @@ export function HomeShell({ content, practiceSettings }: HomeShellProps) {
       <section className="page-hero-panel panel-pad">
         <Reveal className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="stack-md">
-            <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--accent)]">{content.contact.eyebrow}</p>
+            <p className="editorial-label">{content.contact.eyebrow}</p>
             <h2 className="max-w-3xl text-4xl leading-tight md:text-5xl">{content.contact.title}</h2>
             <p className="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{content.contact.body}</p>
             <div className="grid gap-3 text-sm text-[color:var(--foreground)] md:grid-cols-2">
