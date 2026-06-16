@@ -78,7 +78,7 @@ export function ContactForm({ labels }: ContactFormProps) {
         <label className="grid gap-2">
           <span className="text-sm font-semibold text-[color:var(--foreground)]">{labels.nameFieldLabel}</span>
           <input
-            className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--surface)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
+            className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--background)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
             name="name"
             required
             type="text"
@@ -89,7 +89,7 @@ export function ContactForm({ labels }: ContactFormProps) {
           <label className="grid gap-2">
             <span className="text-sm font-semibold text-[color:var(--foreground)]">{labels.emailInputLabel}</span>
             <input
-              className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--surface)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
+              className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--background)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
               name="email"
               required
               type="email"
@@ -99,7 +99,7 @@ export function ContactForm({ labels }: ContactFormProps) {
           <label className="grid gap-2">
             <span className="text-sm font-semibold text-[color:var(--foreground)]">{labels.phoneInputLabel}</span>
             <input
-              className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--surface)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
+              className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--background)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
               name="phone"
               type="tel"
             />
@@ -109,7 +109,7 @@ export function ContactForm({ labels }: ContactFormProps) {
         <label className="grid gap-2">
           <span className="text-sm font-semibold text-[color:var(--foreground)]">{labels.modalityFieldLabel}</span>
           <select
-            className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--surface)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
+            className="min-h-12 rounded-2xl border border-black/10 bg-[color:var(--background)] px-4 py-3 text-base text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
             defaultValue={modalityOptions[0]}
             name="modality"
           >
@@ -124,7 +124,7 @@ export function ContactForm({ labels }: ContactFormProps) {
         <label className="grid gap-2">
           <span className="text-sm font-semibold text-[color:var(--foreground)]">{labels.messageFieldLabel}</span>
           <textarea
-            className="min-h-40 rounded-2xl border border-black/10 bg-[color:var(--surface)] px-4 py-3 text-base leading-7 text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
+            className="min-h-40 rounded-2xl border border-black/10 bg-[color:var(--background)] px-4 py-3 text-base leading-7 text-[color:var(--foreground)] outline-none transition focus:border-[color:var(--accent)]"
             name="message"
             required
           />
