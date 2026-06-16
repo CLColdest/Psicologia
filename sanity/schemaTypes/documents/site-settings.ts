@@ -6,63 +6,46 @@ export const siteSettingsType = defineType({
   title: "Configuracion del sitio",
   type: "document",
   fieldsets: [
-    { name: "branding", title: "Marca" },
+    { name: "branding", title: "Marca visible" },
     { name: "contact", title: "Datos reutilizables de contacto" },
     { name: "theme", title: "Paleta de colores" },
-    { name: "labelsEs", title: "Textos globales ES" },
-    { name: "labelsEn", title: "Textos globales EN" },
-    { name: "social", title: "Redes sociales" }
+    { name: "labels", title: "Menu y botones globales" },
+    { name: "social", title: "Redes sociales flotantes" }
   ],
   fields: [
-    defineField({ name: "siteName", title: "Nombre del sitio", type: "string", fieldset: "branding", validation: (rule) => rule.required() }),
-    defineField({ name: "brandTagline", title: "Bajada de marca", type: "string", fieldset: "branding" }),
+    defineField({ name: "siteName", title: "Nombre principal", type: "string", fieldset: "branding", validation: (rule) => rule.required() }),
+    defineField({ name: "brandTagline", title: "Bajada bajo el nombre", type: "string", fieldset: "branding" }),
     defineField({ name: "whatsappNumber", title: "Numero de WhatsApp", type: "string", fieldset: "contact" }),
-    defineField({ name: "bookingWhatsappLabel", title: "Texto del widget flotante", type: "string", fieldset: "contact" }),
-    defineField({ name: "phoneLabel", title: "Telefono visible", type: "string", description: "Este valor se reutiliza en inicio y contacto.", fieldset: "contact" }),
-    defineField({ name: "email", title: "Correo de contacto", type: "string", description: "Este valor se reutiliza en inicio y contacto.", fieldset: "contact" }),
-    defineField({ name: "address", title: "Direccion", type: "string", description: "Este valor se reutiliza en inicio y contacto.", fieldset: "contact" }),
-    defineField({ name: "schedule", title: "Horario", type: "string", description: "Este valor se reutiliza en inicio y contacto.", fieldset: "contact" }),
-    defineField({ name: "mapEmbedUrl", title: "URL embebida de mapa", type: "url", fieldset: "contact" }),
+    defineField({ name: "bookingWhatsappLabel", title: "Texto del boton flotante de WhatsApp", type: "string", fieldset: "contact" }),
+    defineField({ name: "phoneLabel", title: "Telefono visible", type: "string", description: "Se reutiliza en inicio y contacto.", fieldset: "contact" }),
+    defineField({ name: "email", title: "Correo visible", type: "string", description: "Se reutiliza en inicio y contacto.", fieldset: "contact" }),
+    defineField({ name: "address", title: "Direccion visible", type: "string", description: "Se reutiliza en inicio y contacto.", fieldset: "contact" }),
+    defineField({ name: "schedule", title: "Horario visible", type: "string", description: "Se reutiliza en inicio y contacto.", fieldset: "contact" }),
+    defineField({ name: "mapEmbedUrl", title: "URL del mapa embebido", type: "url", fieldset: "contact" }),
     defineField({ name: "backgroundColor", title: "Color de fondo", type: "string", fieldset: "theme", components: { input: ColorInput } }),
     defineField({ name: "foregroundColor", title: "Color principal de texto", type: "string", fieldset: "theme", components: { input: ColorInput } }),
-    defineField({ name: "accentColor", title: "Color acento", type: "string", fieldset: "theme", components: { input: ColorInput } }),
-    defineField({ name: "surfaceColor", title: "Color de superficie", type: "string", fieldset: "theme", components: { input: ColorInput } }),
-    defineField({ name: "surfaceStrongColor", title: "Color de superficie destacada", type: "string", fieldset: "theme", components: { input: ColorInput } }),
+    defineField({ name: "accentColor", title: "Color de botones y acentos", type: "string", fieldset: "theme", components: { input: ColorInput } }),
+    defineField({ name: "surfaceColor", title: "Color de cajas", type: "string", fieldset: "theme", components: { input: ColorInput } }),
+    defineField({ name: "surfaceStrongColor", title: "Color del degradado de fondo", type: "string", fieldset: "theme", components: { input: ColorInput } }),
     defineField({
       name: "uiLabelsEs",
-      title: "Textos globales ES",
+      title: "Textos globales",
       type: "object",
-      fieldset: "labelsEs",
+      fieldset: "labels",
       fields: [
-        defineField({ name: "homeLabel", title: "Label Inicio", type: "string" }),
-        defineField({ name: "aboutLabel", title: "Label Sobre mi", type: "string" }),
-        defineField({ name: "servicesLabel", title: "Label Servicios", type: "string" }),
-        defineField({ name: "postsLabel", title: "Label Columnas", type: "string" }),
-        defineField({ name: "contactLabel", title: "Label Contacto", type: "string" }),
-        defineField({ name: "headerWhatsappLabel", title: "CTA header WhatsApp", type: "string" }),
-        defineField({ name: "floatingBookingLabel", title: "Texto flotante WhatsApp", type: "string" }),
-        defineField({ name: "backToTopLabel", title: "Label volver arriba", type: "string" })
-      ]
-    }),
-    defineField({
-      name: "uiLabelsEn",
-      title: "Textos globales EN",
-      type: "object",
-      fieldset: "labelsEn",
-      fields: [
-        defineField({ name: "homeLabel", title: "Home label", type: "string" }),
-        defineField({ name: "aboutLabel", title: "About label", type: "string" }),
-        defineField({ name: "servicesLabel", title: "Services label", type: "string" }),
-        defineField({ name: "postsLabel", title: "Articles label", type: "string" }),
-        defineField({ name: "contactLabel", title: "Contact label", type: "string" }),
-        defineField({ name: "headerWhatsappLabel", title: "Header WhatsApp CTA", type: "string" }),
-        defineField({ name: "floatingBookingLabel", title: "Floating WhatsApp text", type: "string" }),
-        defineField({ name: "backToTopLabel", title: "Back to top label", type: "string" })
+        defineField({ name: "homeLabel", title: "Texto Inicio en el menu", type: "string" }),
+        defineField({ name: "aboutLabel", title: "Texto Sobre mi en el menu", type: "string" }),
+        defineField({ name: "servicesLabel", title: "Texto Servicios en el menu", type: "string" }),
+        defineField({ name: "postsLabel", title: "Texto Columnas en el menu", type: "string" }),
+        defineField({ name: "contactLabel", title: "Texto Contacto en el menu", type: "string" }),
+        defineField({ name: "headerWhatsappLabel", title: "Boton del header", type: "string" }),
+        defineField({ name: "floatingBookingLabel", title: "Boton flotante inferior", type: "string" }),
+        defineField({ name: "backToTopLabel", title: "Boton volver arriba", type: "string" })
       ]
     }),
     defineField({
       name: "socialLinks",
-      title: "Redes sociales flotantes",
+      title: "Redes sociales",
       type: "array",
       fieldset: "social",
       of: [
@@ -71,7 +54,7 @@ export const siteSettingsType = defineType({
           name: "socialLink",
           title: "Red social",
           fields: [
-            defineField({ name: "label", title: "Nombre", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "label", title: "Nombre de la red", type: "string", validation: (rule) => rule.required() }),
             defineField({ name: "href", title: "URL", type: "url", validation: (rule) => rule.required() })
           ],
           preview: {

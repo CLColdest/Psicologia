@@ -17,7 +17,6 @@ export const siteSettingsQuery = groq`
     surfaceStrongColor,
     mapEmbedUrl,
     uiLabelsEs,
-    uiLabelsEn,
     socialLinks[]{
       label,
       href
@@ -26,7 +25,7 @@ export const siteSettingsQuery = groq`
 `;
 
 export const homePageQuery = groq`
-  *[_type == "homePage" && language == $language][0]{
+  *[_type == "homePage"][0]{
     heroEyebrow,
     heroTitle,
     heroSubtitle,
@@ -52,6 +51,7 @@ export const homePageQuery = groq`
     postsTitle,
     postsIntro,
     postsPrimaryCta,
+    postsReadMoreLabel,
     contactEyebrow,
     contactTitle,
     contactBody,
@@ -60,7 +60,7 @@ export const homePageQuery = groq`
 `;
 
 export const aboutPageQuery = groq`
-  *[_type == "aboutPage" && language == $language][0]{
+  *[_type == "aboutPage"][0]{
     eyebrow,
     title,
     intro,
@@ -78,7 +78,7 @@ export const aboutPageQuery = groq`
 `;
 
 export const servicesPageQuery = groq`
-  *[_type == "servicesPage" && language == $language][0]{
+  *[_type == "servicesPage"][0]{
     eyebrow,
     title,
     intro,
@@ -89,7 +89,7 @@ export const servicesPageQuery = groq`
 `;
 
 export const postsPageQuery = groq`
-  *[_type == "postsPage" && language == $language][0]{
+  *[_type == "postsPage"][0]{
     eyebrow,
     title,
     intro,
@@ -101,7 +101,7 @@ export const postsPageQuery = groq`
 `;
 
 export const contactPageQuery = groq`
-  *[_type == "contactPage" && language == $language][0]{
+  *[_type == "contactPage"][0]{
     title,
     mapTitle,
     whatsappFieldLabel,
@@ -125,28 +125,28 @@ export const contactPageQuery = groq`
 `;
 
 export const servicesQuery = groq`
-  *[_type == "service" && language == $language] | order(order asc, title asc) {
+  *[_type == "service"] | order(order asc, title asc) {
     title,
     summary
   }
 `;
 
 export const faqsQuery = groq`
-  *[_type == "faq" && language == $language] | order(order asc, question asc) [0...3] {
+  *[_type == "faq"] | order(order asc, question asc) [0...3] {
     question,
     answer
   }
 `;
 
 export const testimonialsQuery = groq`
-  *[_type == "testimonial" && language == $language] | order(order asc, name asc) {
+  *[_type == "testimonial"] | order(order asc, name asc) {
     name,
     quote
   }
 `;
 
 export const postsPreviewQuery = groq`
-  *[_type == "post" && language == $language] | order(publishedAt desc) [0...3] {
+  *[_type == "post"] | order(publishedAt desc) [0...3] {
     _id,
     title,
     "slug": slug.current,
@@ -159,7 +159,7 @@ export const postsPreviewQuery = groq`
 `;
 
 export const postsListQuery = groq`
-  *[_type == "post" && language == $language] | order(publishedAt desc) {
+  *[_type == "post"] | order(publishedAt desc) {
     _id,
     title,
     "slug": slug.current,
@@ -173,13 +173,12 @@ export const postsListQuery = groq`
 
 export const postSlugsQuery = groq`
   *[_type == "post" && defined(slug.current)]{
-    language,
     "slug": slug.current
   }
 `;
 
 export const postBySlugQuery = groq`
-  *[_type == "post" && language == $language && slug.current == $slug][0]{
+  *[_type == "post" && slug.current == $slug][0]{
     title,
     excerpt,
     "slug": slug.current,

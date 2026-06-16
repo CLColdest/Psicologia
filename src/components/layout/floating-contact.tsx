@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { LocaleUiLabels, PracticeSettings } from "@/lib/site";
+import type { PracticeSettings, UiLabels } from "@/lib/site";
 
 type FloatingContactProps = {
   practiceSettings: PracticeSettings;
-  uiLabels: LocaleUiLabels;
+  uiLabels: UiLabels;
 };
 
 function SocialIcon({ label }: { label: string }) {

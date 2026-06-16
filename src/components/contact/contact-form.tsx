@@ -18,12 +18,11 @@ type ContactFormLabels = {
 
 type ContactFormProps = {
   labels: ContactFormLabels;
-  locale: "es" | "en";
 };
 
 type SubmissionState = "idle" | "submitting" | "success" | "error";
 
-export function ContactForm({ labels, locale }: ContactFormProps) {
+export function ContactForm({ labels }: ContactFormProps) {
   const [status, setStatus] = useState<SubmissionState>("idle");
   const [feedback, setFeedback] = useState("");
   const modalityOptions = labels.modalityOptions.length ? labels.modalityOptions : ["Online", "Presencial", "Lo conversamos"];
@@ -33,7 +32,6 @@ export function ContactForm({ labels, locale }: ContactFormProps) {
     setFeedback("");
 
     const payload = {
-      locale,
       name: String(formData.get("name") || ""),
       email: String(formData.get("email") || ""),
       phone: String(formData.get("phone") || ""),
@@ -74,11 +72,7 @@ export function ContactForm({ labels, locale }: ContactFormProps) {
         <p className="max-w-2xl text-base leading-7 text-[color:var(--muted)]">{labels.formIntro}</p>
       </div>
 
-      <form
-        action={handleSubmit}
-        className="mt-8 grid gap-5"
-        id="contact-form"
-      >
+      <form action={handleSubmit} className="mt-8 grid gap-5" id="contact-form">
         <input autoComplete="off" className="hidden" name="website" tabIndex={-1} type="text" />
 
         <label className="grid gap-2">
@@ -142,14 +136,11 @@ export function ContactForm({ labels, locale }: ContactFormProps) {
             disabled={status === "submitting"}
             type="submit"
           >
-            {status === "submitting" ? (locale === "es" ? "Enviando..." : "Sending...") : labels.submitLabel}
+            {status === "submitting" ? "Enviando..." : labels.submitLabel}
           </button>
 
           {feedback ? (
-            <p
-              className={`text-sm ${status === "success" ? "text-[color:var(--accent)]" : "text-red-600"}`}
-              role="status"
-            >
+            <p className={`text-sm ${status === "success" ? "text-[color:var(--accent)]" : "text-red-600"}`} role="status">
               {feedback}
             </p>
           ) : null}

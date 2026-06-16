@@ -1,9 +1,7 @@
-import type { Locale } from "@/lib/i18n/config";
-
 export const siteConfig = {
   name: "Angela Carvajal",
   description:
-    "Sitio editorial para la consulta psicologica de Angela Carvajal, con base bilingue y contenido administrable desde Sanity."
+    "Sitio editorial para la consulta psicologica de Angela Carvajal, con contenido administrable desde Sanity."
 };
 
 export type SocialLinkSettings = {
@@ -33,7 +31,7 @@ export type ThemeSettings = {
   surfaceStrongColor: string;
 };
 
-export type LocaleUiLabels = {
+export type UiLabels = {
   homeLabel: string;
   aboutLabel: string;
   servicesLabel: string;
@@ -52,8 +50,7 @@ export const defaultPracticeSettings: PracticeSettings = {
   email: "contacto@angelacarvajal.cl",
   address: "Consulta presencial en Santiago",
   schedule: "Lunes a viernes, 9:00 a 19:00",
-  mapEmbedUrl:
-    "https://www.google.com/maps?q=Las%20Condes%2C%20Santiago&z=14&output=embed",
+  mapEmbedUrl: "https://www.google.com/maps?q=Las%20Condes%2C%20Santiago&z=14&output=embed",
   socialLinks: [
     { label: "WhatsApp", href: "https://wa.me/56912345678" },
     { label: "Instagram", href: "https://instagram.com/" },
@@ -82,30 +79,21 @@ export const defaultThemeSettings: ThemeSettings = {
   surfaceStrongColor: "#E6C9C9"
 };
 
-export const defaultUiLabels: Record<Locale, LocaleUiLabels> = {
-  es: {
-    homeLabel: "Inicio",
-    aboutLabel: "Sobre mi",
-    servicesLabel: "Servicios",
-    postsLabel: "Columnas",
-    contactLabel: "Contacto",
-    headerWhatsappLabel: "WhatsApp",
-    floatingBookingLabel: "Agenda tu hora aqui",
-    backToTopLabel: "Volver arriba"
-  },
-  en: {
-    homeLabel: "Home",
-    aboutLabel: "About",
-    servicesLabel: "Services",
-    postsLabel: "Articles",
-    contactLabel: "Contact",
-    headerWhatsappLabel: "WhatsApp",
-    floatingBookingLabel: "Book on WhatsApp",
-    backToTopLabel: "Back to top"
-  }
+export const defaultUiLabels: UiLabels = {
+  homeLabel: "Inicio",
+  aboutLabel: "Sobre mi",
+  servicesLabel: "Servicios",
+  postsLabel: "Columnas",
+  contactLabel: "Contacto",
+  headerWhatsappLabel: "Solicitar hora",
+  floatingBookingLabel: "Agenda tu hora aqui",
+  backToTopLabel: "Volver arriba"
 };
 
-export function buildLocaleUrl(locale: Locale, path = "") {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `/${locale}${path === "" ? "" : normalizedPath}`;
+export function buildSitePath(path = "") {
+  if (!path || path === "/") {
+    return "/";
+  }
+
+  return path.startsWith("/") ? path : `/${path}`;
 }

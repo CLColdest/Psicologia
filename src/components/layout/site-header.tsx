@@ -2,22 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { Locale } from "@/lib/i18n/config";
-import { buildLocaleUrl, type LocaleUiLabels, type PracticeSettings } from "@/lib/site";
+import { buildSitePath, type PracticeSettings, type UiLabels } from "@/lib/site";
 
 type SiteHeaderProps = {
-  locale: Locale;
   siteName?: string;
   brandTagline?: string;
   practiceSettings: PracticeSettings;
-  uiLabels: LocaleUiLabels;
+  uiLabels: UiLabels;
 };
 
-export function SiteHeader({ locale, siteName, brandTagline, practiceSettings, uiLabels }: SiteHeaderProps) {
-  const alternateLocale = locale === "es" ? "en" : "es";
+export function SiteHeader({ siteName, brandTagline, practiceSettings, uiLabels }: SiteHeaderProps) {
   const pathname = usePathname();
   const navLinks = [
-    { href: "", label: uiLabels.homeLabel },
+    { href: "/", label: uiLabels.homeLabel },
     { href: "/sobre-mi", label: uiLabels.aboutLabel },
     { href: "/servicios", label: uiLabels.servicesLabel },
     { href: "/columnas", label: uiLabels.postsLabel },
@@ -28,7 +25,7 @@ export function SiteHeader({ locale, siteName, brandTagline, practiceSettings, u
     <header className="sticky top-0 z-50 px-4 pt-4 md:px-6">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-[1.6rem] border border-black/8 bg-[color:rgba(250,247,242,0.82)] px-5 py-4 shadow-[0_18px_42px_rgba(63,42,16,0.08)] backdrop-blur-xl">
         <div className="min-w-0">
-          <Link className="block text-base tracking-[0.18em] text-[color:color-mix(in_srgb,var(--foreground)_56%,#2f241d)] uppercase" href={buildLocaleUrl(locale)}>
+          <Link className="block text-base tracking-[0.18em] text-[color:color-mix(in_srgb,var(--foreground)_56%,#2f241d)] uppercase" href="/">
             {siteName}
           </Link>
           <p className="mt-1 hidden text-xs text-[color:var(--muted)] md:block">{brandTagline}</p>
@@ -39,11 +36,11 @@ export function SiteHeader({ locale, siteName, brandTagline, practiceSettings, u
             <Link
               key={`${link.href}-${link.label}`}
               className={`rounded-full px-4 py-2 text-sm transition ${
-                pathname === buildLocaleUrl(locale, link.href)
+                pathname === buildSitePath(link.href)
                   ? "bg-[color:var(--accent)] text-[color:var(--accent-foreground)] shadow-[0_10px_20px_rgba(63,42,16,0.08)]"
                   : "text-[color:var(--muted)] hover:text-[color:color-mix(in_srgb,var(--foreground)_56%,#2f241d)]"
               }`}
-              href={buildLocaleUrl(locale, link.href)}
+              href={buildSitePath(link.href)}
             >
               {link.label}
             </Link>
@@ -59,12 +56,6 @@ export function SiteHeader({ locale, siteName, brandTagline, practiceSettings, u
           >
             {uiLabels.headerWhatsappLabel}
           </a>
-          <Link
-            className="rounded-full border border-black/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-[color:var(--foreground)] transition hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
-            href={buildLocaleUrl(alternateLocale)}
-          >
-            {alternateLocale.toUpperCase()}
-          </Link>
         </div>
       </div>
     </header>

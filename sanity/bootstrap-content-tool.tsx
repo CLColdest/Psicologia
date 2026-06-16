@@ -17,51 +17,16 @@ type PortableTextBlock = {
 
 type AboutPageDocument = {
   _id: string;
-  intro?: string;
-  mainImage?: { asset?: { _ref?: string } };
-  biographyTitle?: string;
-  approachTitle?: string;
-  experienceTitle?: string;
   biography?: PortableTextBlock[];
   approach?: PortableTextBlock[];
   experience?: PortableTextBlock[];
 };
 
-type HomePageDocument = {
+type GenericDocument = {
   _id: string;
-  heroDescription?: string;
-  approachBody?: string;
-  approachPoints?: string[];
-  servicesIntro?: string;
-  postsIntro?: string;
-  contactTitle?: string;
-  contactBody?: string;
-};
-
-type ContactPageDocument = {
-  _id: string;
-  closingBody?: string;
-};
-
-type ServicesPageDocument = {
-  _id: string;
-  intro?: string;
   notes?: string[];
-  closingTitle?: string;
-  closingBody?: string;
-};
-
-type PostsPageDocument = {
-  _id: string;
-  intro?: string;
-  title?: string;
-  sideEyebrow?: string;
-  sideBody?: string;
   sideTopics?: string[];
-};
-
-type SiteSettingsDocument = {
-  _id: string;
+  approachPoints?: string[];
 };
 
 const baseSiteSettings = {
@@ -86,19 +51,9 @@ const baseSiteSettings = {
     servicesLabel: "Servicios",
     postsLabel: "Columnas",
     contactLabel: "Contacto",
-    headerWhatsappLabel: "WhatsApp",
+    headerWhatsappLabel: "Solicitar hora",
     floatingBookingLabel: "Agenda tu hora aqui",
     backToTopLabel: "Volver arriba"
-  },
-  uiLabelsEn: {
-    homeLabel: "Home",
-    aboutLabel: "About",
-    servicesLabel: "Services",
-    postsLabel: "Articles",
-    contactLabel: "Contact",
-    headerWhatsappLabel: "WhatsApp",
-    floatingBookingLabel: "Book on WhatsApp",
-    backToTopLabel: "Back to top"
   },
   socialLinks: [
     { _key: "wa", label: "WhatsApp", href: "https://wa.me/56912345678" },
@@ -110,17 +65,22 @@ const baseSiteSettings = {
 
 const baseHomePage = {
   _type: "homePage",
-  language: "es",
   heroEyebrow: "Psicoterapia para adultos, adolescentes y parejas",
   heroTitle: "Un espacio sereno para comprender lo que hoy te esta costando sostener.",
   heroSubtitle: "Atencion psicologica online y presencial con un primer contacto simple y cercano.",
-  heroDescription: "Angela Carvajal acompana procesos de ansiedad, crisis vitales, duelo, autoestima, vinculos y malestar emocional desde una mirada calida, profesional y respetuosa.",
+  heroDescription:
+    "Angela Carvajal acompana procesos de ansiedad, crisis vitales, duelo, autoestima, vinculos y malestar emocional desde una mirada calida, profesional y respetuosa.",
   heroPrimaryCta: "Escribir por WhatsApp",
   heroSecondaryCta: "Ver servicios",
   approachEyebrow: "Enfoque",
   approachTitle: "Un proceso terapeutico claro, humano y sin sobrecarga.",
-  approachBody: "La propuesta de trabajo busca ofrecer un espacio de escucha y elaboracion para comprender lo que te ocurre, fortalecer recursos personales y avanzar con mayor claridad en momentos de dificultad.",
-  approachPoints: ["Espacio de escucha cuidado y profesional", "Atencion online y presencial segun tu necesidad", "Un primer contacto cercano para comenzar con claridad"],
+  approachBody:
+    "La propuesta de trabajo busca ofrecer un espacio de escucha y elaboracion para comprender lo que te ocurre, fortalecer recursos personales y avanzar con mayor claridad en momentos de dificultad.",
+  approachPoints: [
+    "Espacio de escucha cuidado y profesional",
+    "Atencion online y presencial segun tu necesidad",
+    "Un primer contacto cercano para comenzar con claridad"
+  ],
   servicesEyebrow: "Especialidades",
   servicesTitle: "Acompanamiento segun etapa vital, necesidad y tipo de proceso.",
   servicesIntro: "Cada espacio terapeutico esta pensado para responder con claridad a distintas necesidades de acompanamiento psicologico.",
@@ -146,11 +106,10 @@ const baseHomePage = {
 
 const baseAboutPage = {
   _type: "aboutPage",
-  language: "es",
   eyebrow: "Sobre mi",
   title: "Un espacio terapeutico sostenido por presencia, criterio y escucha.",
-  intro: "Soy Angela Carvajal y acompano procesos psicoterapeuticos desde una mirada cercana, respetuosa y clinicamente cuidadosa. Me interesa ofrecer un espacio donde puedas comprender lo que estas viviendo y avanzar con mas claridad.",
-  mainImage: undefined,
+  intro:
+    "Soy Angela Carvajal y acompano procesos psicoterapeuticos desde una mirada cercana, respetuosa y clinicamente cuidadosa. Me interesa ofrecer un espacio donde puedas comprender lo que estas viviendo y avanzar con mas claridad.",
   biography: [
     {
       _key: "biografia-base",
@@ -200,7 +159,6 @@ const baseAboutPage = {
 
 const baseContactPage = {
   _type: "contactPage",
-  language: "es",
   title: "Conversemos sobre tu proceso",
   mapTitle: "Mapa de ubicacion",
   whatsappFieldLabel: "WhatsApp",
@@ -224,7 +182,6 @@ const baseContactPage = {
 
 const baseServicesPage = {
   _type: "servicesPage",
-  language: "es",
   eyebrow: "Servicios",
   title: "Espacios de acompanamiento para distintas necesidades y momentos vitales.",
   intro: "La terapia puede abrir un espacio de comprension, alivio y cambio cuando algo se vuelve dificil de sostener. Estas son las principales modalidades de atencion disponibles hoy.",
@@ -235,7 +192,6 @@ const baseServicesPage = {
 
 const basePostsPage = {
   _type: "postsPage",
-  language: "es",
   eyebrow: "Columnas",
   title: "Columnas para comprender mejor lo que estas viviendo.",
   intro: "Aqui encontraras articulos sobre ansiedad, relaciones, procesos personales y salud mental, escritos para orientar con claridad y cercania.",
@@ -249,7 +205,6 @@ const baseServices = [
   {
     _id: "seed-service-psicoterapia-adultos-es",
     _type: "service",
-    language: "es",
     title: "Psicoterapia para adultos",
     summary: "Un espacio para trabajar ansiedad, crisis vitales, duelo, autoestima, estres, vinculos y malestar emocional desde una escucha profesional y respetuosa.",
     modality: "both",
@@ -258,7 +213,6 @@ const baseServices = [
   {
     _id: "seed-service-psicoterapia-adolescentes-es",
     _type: "service",
-    language: "es",
     title: "Psicoterapia para adolescentes",
     summary: "Acompanamiento para momentos de cambio, dificultades emocionales, conflictos familiares, autoestima, exigencia academica y malestar propio de esta etapa vital.",
     modality: "both",
@@ -267,7 +221,6 @@ const baseServices = [
   {
     _id: "seed-service-parejas-es",
     _type: "service",
-    language: "es",
     title: "Terapia de pareja",
     summary: "Un espacio para abordar dificultades de comunicacion, distancia emocional, conflictos recurrentes y formas de relacionarse que necesitan ser revisadas.",
     modality: "both",
@@ -279,7 +232,6 @@ const baseFaqs = [
   {
     _id: "seed-faq-primer-contacto-es",
     _type: "faq",
-    language: "es",
     question: "Como se realiza el primer contacto?",
     answer: "Puedes escribir por WhatsApp o dejar un mensaje en el formulario. La idea es que ese primer paso sea simple y claro.",
     order: 1
@@ -287,7 +239,6 @@ const baseFaqs = [
   {
     _id: "seed-faq-modalidad-es",
     _type: "faq",
-    language: "es",
     question: "La atencion puede ser online o presencial?",
     answer: "Si. Dependiendo de tu preferencia y contexto, la terapia puede realizarse online o de manera presencial.",
     order: 2
@@ -295,7 +246,6 @@ const baseFaqs = [
   {
     _id: "seed-faq-proxima-etapa-es",
     _type: "faq",
-    language: "es",
     question: "Y si no tengo claro que tipo de apoyo necesito?",
     answer: "No necesitas llegar con todo resuelto. El primer contacto tambien sirve para orientarte y ver juntos cual puede ser el mejor siguiente paso.",
     order: 3
@@ -306,18 +256,8 @@ const baseTestimonials = [
   {
     _id: "seed-testimonial-es-01",
     _type: "testimonial",
-    language: "es",
     name: "Paciente adulta",
     quote: "Desde la primera sesion senti un espacio muy respetuoso y claro. Pude entender mejor lo que me estaba pasando y avanzar con mas calma.",
-    featured: true,
-    order: 1
-  },
-  {
-    _id: "seed-testimonial-en-01",
-    _type: "testimonial",
-    language: "en",
-    name: "Client",
-    quote: "I felt genuinely heard from the first contact, and the process felt clear, respectful, and human.",
     featured: true,
     order: 1
   }
@@ -334,7 +274,6 @@ const basePosts = [
   {
     _id: "seed-post-es-01",
     _type: "post",
-    language: "es",
     title: "Cuando pedir ayuda psicologica deja de sentirse como una duda lejana",
     slug: { _type: "slug", current: "cuando-pedir-ayuda-psicologica" },
     excerpt: "Algunas senales que ayudan a reconocer cuando el malestar dejo de ser pasajero y conviene pedir acompanamiento.",
@@ -345,31 +284,18 @@ const basePosts = [
       {
         _key: "post-es-1",
         _type: "block",
-        children: [
-          {
-            _key: "post-es-1-span",
-            _type: "span",
-            text: "Muchas personas llegan a terapia no porque algo haya explotado de un momento a otro, sino porque llevan demasiado tiempo funcionando con ansiedad, cansancio o confusion."
-          }
-        ]
+        children: [{ _key: "post-es-1-span", _type: "span", text: "Muchas personas llegan a terapia no porque algo haya explotado de un momento a otro, sino porque llevan demasiado tiempo funcionando con ansiedad, cansancio o confusion." }]
       },
       {
         _key: "post-es-2",
         _type: "block",
-        children: [
-          {
-            _key: "post-es-2-span",
-            _type: "span",
-            text: "Pedir ayuda no requiere tener todo claro. A veces basta con reconocer que algo se ha vuelto demasiado pesado, repetitivo o dificil de sostener en soledad."
-          }
-        ]
+        children: [{ _key: "post-es-2-span", _type: "span", text: "Pedir ayuda no requiere tener todo claro. A veces basta con reconocer que algo se ha vuelto demasiado pesado, repetitivo o dificil de sostener en soledad." }]
       }
     ]
   },
   {
     _id: "seed-post-es-02",
     _type: "post",
-    language: "es",
     title: "Ansiedad cotidiana: cuando lo urgente empieza a ocuparlo todo",
     slug: { _type: "slug", current: "ansiedad-cotidiana-cuando-lo-urgente-ocupa-todo" },
     excerpt: "Una mirada simple para reconocer cuando la ansiedad deja de ser puntual y empieza a organizar toda la vida diaria.",
@@ -380,37 +306,7 @@ const basePosts = [
       {
         _key: "post-es-3",
         _type: "block",
-        children: [
-          {
-            _key: "post-es-3-span",
-            _type: "span",
-            text: "La ansiedad no siempre aparece como panico evidente. A veces se expresa como apuro constante, dificultad para descansar o una mente que no logra detenerse."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    _id: "seed-post-en-01",
-    _type: "post",
-    language: "en",
-    title: "When asking for psychological support stops feeling abstract",
-    slug: { _type: "slug", current: "when-asking-for-psychological-support-stops-feeling-abstract" },
-    excerpt: "A simple frame for recognizing when distress no longer makes sense to carry alone.",
-    author: { _type: "reference", _ref: "seed-author-01" },
-    categories: ["Emotional wellbeing"],
-    publishedAt: "2026-06-15T10:00:00Z",
-    body: [
-      {
-        _key: "post-en-1",
-        _type: "block",
-        children: [
-          {
-            _key: "post-en-1-span",
-            _type: "span",
-            text: "Many people reach therapy not because something dramatic happened, but because they have been carrying exhaustion, anxiety, or confusion for too long."
-          }
-        ]
+        children: [{ _key: "post-es-3-span", _type: "span", text: "La ansiedad no siempre aparece como panico evidente. A veces se expresa como apuro constante, dificultad para descansar o una mente que no logra detenerse." }]
       }
     ]
   }
@@ -438,10 +334,7 @@ function normalizePortableText(blocks: PortableTextBlock[] | undefined, prefix: 
   }));
 }
 
-function buildLegacyFieldUpdates(
-  current: Record<string, unknown> | null | undefined,
-  replacements: Record<string, { from: string; to: string }>
-) {
+function buildLegacyFieldUpdates(current: Record<string, unknown> | null | undefined, replacements: Record<string, { from: string; to: string }>) {
   const updates: Record<string, string> = {};
 
   if (!current) {
@@ -464,68 +357,41 @@ function sameStringArray(current: unknown, expected: string[]) {
 function BootstrapContentPane() {
   const client = useClient({ apiVersion: "2024-06-01" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("Crea o completa la estructura minima en espanol sin pisar contenido existente.");
+  const [message, setMessage] = useState("Sincroniza la estructura base en espanol y elimina el contenido legado en ingles.");
 
   async function handleBootstrap() {
     setStatus("loading");
-    setMessage("Revisando contenido existente y completando lo que falte...");
+    setMessage("Sincronizando contenido base y limpiando contenido legado...");
 
     try {
-      const [siteSettings, homePage, aboutPage, contactPage, servicesPage, postsPage] = await Promise.all([
-        client.fetch<SiteSettingsDocument | null>('*[_type == "siteSettings"][0]{_id}'),
-        client.fetch<HomePageDocument | null>(
-          '*[_type == "homePage" && language == "es"][0]{_id, heroDescription, approachBody, approachPoints, servicesIntro, postsIntro, contactTitle, contactBody}'
-        ),
-        client.fetch<AboutPageDocument | null>(
-          '*[_type == "aboutPage" && language == "es"][0]{_id, intro, mainImage, biographyTitle, approachTitle, experienceTitle, biography, approach, experience}'
-        ),
-        client.fetch<ContactPageDocument | null>('*[_type == "contactPage" && language == "es"][0]{_id, closingBody}'),
-        client.fetch<ServicesPageDocument | null>(
-          '*[_type == "servicesPage" && language == "es"][0]{_id, intro, notes, closingTitle, closingBody}'
-        ),
-        client.fetch<PostsPageDocument | null>('*[_type == "postsPage" && language == "es"][0]{_id, title, intro, sideEyebrow, sideBody, sideTopics}')
+      const [siteSettings, homePage, aboutPage, contactPage, servicesPage, postsPage, englishDocs] = await Promise.all([
+        client.fetch<{ _id: string } | null>('*[_type == "siteSettings"][0]{_id}'),
+        client.fetch<GenericDocument | null>('*[_type == "homePage"][0]{_id, approachPoints}'),
+        client.fetch<AboutPageDocument | null>('*[_type == "aboutPage"][0]{_id, biography, approach, experience}'),
+        client.fetch<GenericDocument | null>('*[_type == "contactPage"][0]{_id}'),
+        client.fetch<GenericDocument | null>('*[_type == "servicesPage"][0]{_id, notes}'),
+        client.fetch<GenericDocument | null>('*[_type == "postsPage"][0]{_id, sideTopics}'),
+        client.fetch<string[]>('*[_type in ["homePage","aboutPage","contactPage","servicesPage","postsPage","service","faq","testimonial","post"] && language == "en"]._id')
       ]);
 
       const transaction = client.transaction();
 
+      for (const docId of englishDocs) {
+        transaction.delete(docId);
+      }
+
       if (!siteSettings?._id) {
         transaction.create(baseSiteSettings);
       } else {
-        transaction.patch(siteSettings._id, (patch) => patch.setIfMissing(baseSiteSettings));
+        transaction.patch(siteSettings._id, (patch) => patch.setIfMissing(baseSiteSettings).unset(["uiLabelsEn"]));
       }
 
       if (!homePage?._id) {
         transaction.create(baseHomePage);
       } else {
-        const legacyHomeUpdates = buildLegacyFieldUpdates(homePage, {
-          heroDescription: {
-            from: "Este texto inicial se puede reemplazar por la propuesta de valor real de la profesional.",
-            to: baseHomePage.heroDescription
-          },
-          approachBody: {
-            from: "La home debe explicar el servicio, resolver dudas y facilitar el primer contacto.",
-            to: baseHomePage.approachBody
-          },
-          servicesIntro: {
-            from: "Bloque inicial para explicar rapido para quien es cada servicio.",
-            to: baseHomePage.servicesIntro
-          },
-          postsIntro: {
-            from: "Este bloque debe funcionar como un muro editorial simple conectado a Sanity.",
-            to: baseHomePage.postsIntro
-          },
-          contactTitle: {
-            from: "Contacto directo y datos visibles.",
-            to: baseHomePage.contactTitle
-          },
-          contactBody: {
-            from: "WhatsApp, datos y pagina de contacto deben convivir sin friccion.",
-            to: baseHomePage.contactBody
-          }
-        });
-
+        const legacyHomeUpdates = buildLegacyFieldUpdates(homePage, {});
         transaction.patch(homePage._id, (patch) => {
-          let nextPatch = patch.setIfMissing(baseHomePage);
+          let nextPatch = patch.setIfMissing(baseHomePage).unset(["language"]);
           if (sameStringArray(homePage.approachPoints, ["Especialidades claras", "Credenciales visibles", "WhatsApp siempre a mano"])) {
             nextPatch = nextPatch.set({ approachPoints: baseHomePage.approachPoints });
           }
@@ -539,84 +405,31 @@ function BootstrapContentPane() {
       if (!aboutPage?._id) {
         transaction.create(baseAboutPage);
       } else {
-        const legacyAboutUpdates = buildLegacyFieldUpdates(aboutPage, {
-          intro: {
-            from: "Presentacion inicial de la profesional y su enfoque de trabajo.",
-            to: baseAboutPage.intro
-          },
-          biographyTitle: {
-            from: "Biografia profesional",
-            to: baseAboutPage.biographyTitle
-          },
-          approachTitle: {
-            from: "Enfoque terapeutico",
-            to: baseAboutPage.approachTitle
-          },
-          experienceTitle: {
-            from: "Experiencia y certificaciones",
-            to: baseAboutPage.experienceTitle
-          }
-        });
-
         transaction.patch(aboutPage._id, (patch) =>
-          {
-            let nextPatch = patch.setIfMissing(baseAboutPage);
-            if (Object.keys(legacyAboutUpdates).length) {
-              nextPatch = nextPatch.set(legacyAboutUpdates);
-            }
-            return nextPatch.set({
+          patch
+            .setIfMissing(baseAboutPage)
+            .unset(["language"])
+            .set({
               biography: normalizePortableText(aboutPage.biography, "biografia", baseAboutPage.biography),
               approach: normalizePortableText(aboutPage.approach, "enfoque", baseAboutPage.approach),
               experience: normalizePortableText(aboutPage.experience, "experiencia", baseAboutPage.experience)
-            });
-          }
+            })
         );
       }
 
       if (!contactPage?._id) {
         transaction.create(baseContactPage);
       } else {
-        const legacyContactUpdates = buildLegacyFieldUpdates(contactPage, {
-          closingBody: {
-            from: "Se prioriza WhatsApp, pero dejamos esta estructura lista para envio real despues.",
-            to: baseContactPage.closingBody
-          }
-        });
-
-        transaction.patch(contactPage._id, (patch) => {
-          let nextPatch = patch.setIfMissing(baseContactPage);
-          if (Object.keys(legacyContactUpdates).length) {
-            nextPatch = nextPatch.set(legacyContactUpdates);
-          }
-          return nextPatch;
-        });
+        transaction.patch(contactPage._id, (patch) => patch.setIfMissing(baseContactPage).unset(["language"]));
       }
 
       if (!servicesPage?._id) {
         transaction.create(baseServicesPage);
       } else {
-        const legacyServicesUpdates = buildLegacyFieldUpdates(servicesPage, {
-          intro: {
-            from: "Resumen simple de la oferta principal.",
-            to: baseServicesPage.intro
-          },
-          closingTitle: {
-            from: "Estos bloques luego se conectaran a contenido real.",
-            to: baseServicesPage.closingTitle
-          },
-          closingBody: {
-            from: "Cuando integremos el CMS, esta pagina se alimentara sin rehacer la estructura.",
-            to: baseServicesPage.closingBody
-          }
-        });
-
         transaction.patch(servicesPage._id, (patch) => {
-          let nextPatch = patch.setIfMissing(baseServicesPage);
+          let nextPatch = patch.setIfMissing(baseServicesPage).unset(["language"]);
           if (sameStringArray(servicesPage.notes, ["Servicios editables desde CMS", "Base para futuras landings", "Preparado para SEO y conversion"])) {
             nextPatch = nextPatch.set({ notes: baseServicesPage.notes });
-          }
-          if (Object.keys(legacyServicesUpdates).length) {
-            nextPatch = nextPatch.set(legacyServicesUpdates);
           }
           return nextPatch;
         });
@@ -625,31 +438,10 @@ function BootstrapContentPane() {
       if (!postsPage?._id) {
         transaction.create(basePostsPage);
       } else {
-        const legacyPostsUpdates = buildLegacyFieldUpdates(postsPage, {
-          title: {
-            from: "Un muro editorial para ampliar contexto, acompanar y generar confianza.",
-            to: basePostsPage.title
-          },
-          intro: {
-            from: "Aqui deben vivir las columnas y articulos publicados desde Sanity, ordenados como una biblioteca simple y clara.",
-            to: basePostsPage.intro
-          }
-        });
-
         transaction.patch(postsPage._id, (patch) => {
-          let nextPatch = patch.setIfMissing(basePostsPage);
-          if (Object.keys(legacyPostsUpdates).length) {
-            nextPatch = nextPatch.set(legacyPostsUpdates);
-          }
-          if (
-            sameStringArray(postsPage.sideTopics, ["2 articulos", "Lectura serena"]) ||
-            sameStringArray(postsPage.sideTopics, ["Clinical reflections", "Anxiety, relationships, and personal processes"]) === false
-          ) {
-            nextPatch = nextPatch.setIfMissing({
-              sideEyebrow: basePostsPage.sideEyebrow,
-              sideBody: basePostsPage.sideBody,
-              sideTopics: basePostsPage.sideTopics
-            });
+          let nextPatch = patch.setIfMissing(basePostsPage).unset(["language"]);
+          if (sameStringArray(postsPage.sideTopics, ["2 articulos", "Lectura serena"])) {
+            nextPatch = nextPatch.set({ sideTopics: basePostsPage.sideTopics });
           }
           return nextPatch;
         });
@@ -657,29 +449,33 @@ function BootstrapContentPane() {
 
       for (const service of baseServices) {
         transaction.createIfNotExists(service);
+        transaction.patch(service._id, (patch) => patch.unset(["language"]));
       }
 
       for (const faq of baseFaqs) {
         transaction.createIfNotExists(faq);
+        transaction.patch(faq._id, (patch) => patch.unset(["language"]));
       }
 
       for (const testimonial of baseTestimonials) {
         transaction.createIfNotExists(testimonial);
+        transaction.patch(testimonial._id, (patch) => patch.unset(["language"]));
       }
 
       transaction.createIfNotExists(baseAuthor);
 
       for (const post of basePosts) {
         transaction.createIfNotExists(post);
+        transaction.patch(post._id, (patch) => patch.unset(["language"]));
       }
 
       await transaction.commit();
 
       setStatus("success");
-      setMessage("Contenido base sincronizado. Se crearon documentos faltantes y se completaron campos vacios sin sobrescribir textos existentes.");
+      setMessage("Contenido base sincronizado. Studio y datos quedaron alineados en espanol, sin contenido ingles legado.");
     } catch (error) {
       setStatus("error");
-      setMessage(error instanceof Error ? error.message : "No se pudo crear el contenido base.");
+      setMessage(error instanceof Error ? error.message : "No se pudo sincronizar el contenido base.");
     }
   }
 
@@ -700,13 +496,13 @@ function BootstrapContentPane() {
           <div style={{ display: "grid", gap: "8px" }}>
             <h1 style={{ fontSize: "24px", margin: 0 }}>Contenido inicial</h1>
             <p style={{ margin: 0, color: "#5f5f5f" }}>
-              Esta accion crea los documentos base si faltan y completa campos nuevos si aun no tienen valor.
+              Crea los documentos base si faltan, completa campos nuevos vacios y limpia el contenido legado en ingles.
             </p>
           </div>
 
           <div style={{ borderRadius: "12px", background: "#f6f6f6", padding: "16px" }}>
             <p style={{ margin: 0, color: "#2f2f2f" }}>
-              Se revisan estos tipos: Configuracion del sitio, Inicio, Sobre mi, Contacto, Pagina de servicios, Servicios, Preguntas frecuentes, Testimonios, Autor y Columnas.
+              Se revisan: configuracion del sitio, inicio, sobre mi, contacto, pagina de servicios, pagina de columnas, especialidades, preguntas frecuentes, testimonios, autora y columnas.
             </p>
           </div>
 

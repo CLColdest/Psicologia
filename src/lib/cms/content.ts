@@ -1,6 +1,17 @@
 import { cache } from "react";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import {
+  buildWhatsappUrl,
+  defaultPracticeSettings,
+  defaultThemeSettings,
+  defaultUiLabels,
+  type PracticeSettings,
+  type SocialLinkSettings,
+  type ThemeSettings,
+  type UiLabels
+} from "@/lib/site";
 import { isDevelopment, sanityClient } from "./client";
+import { portableTextToPlainText } from "./portable-text";
 import {
   aboutPageQuery,
   contactPageQuery,
@@ -8,26 +19,14 @@ import {
   homePageQuery,
   postBySlugQuery,
   postSlugsQuery,
-  postsPageQuery,
   postsListQuery,
+  postsPageQuery,
   postsPreviewQuery,
   servicesPageQuery,
   servicesQuery,
   siteSettingsQuery,
   testimonialsQuery
 } from "./queries";
-import { portableTextToPlainText } from "./portable-text";
-import type { Locale } from "@/lib/i18n/config";
-import {
-  buildWhatsappUrl,
-  defaultPracticeSettings,
-  defaultThemeSettings,
-  defaultUiLabels,
-  type LocaleUiLabels,
-  type PracticeSettings,
-  type SocialLinkSettings,
-  type ThemeSettings
-} from "@/lib/site";
 
 const cmsFetchOptions = isDevelopment ? { cache: "no-store" as const } : { next: { revalidate: 60 } };
 
@@ -172,8 +171,7 @@ type SiteSettingsData = {
   surfaceStrongColor?: string;
   mapEmbedUrl?: string;
   socialLinks?: SocialLinkSettings[];
-  uiLabelsEs?: Partial<LocaleUiLabels>;
-  uiLabelsEn?: Partial<LocaleUiLabels>;
+  uiLabelsEs?: Partial<UiLabels>;
 };
 
 export const getSiteSettings = cache(async () => {
@@ -214,30 +212,29 @@ export function mergeThemeSettings(data: SiteSettingsData | null | undefined): T
   };
 }
 
-export function mergeUiLabels(data: SiteSettingsData | null | undefined, locale: Locale): LocaleUiLabels {
-  const fallback = defaultUiLabels[locale];
-  const source = locale === "es" ? data?.uiLabelsEs : data?.uiLabelsEn;
+export function mergeUiLabels(data: SiteSettingsData | null | undefined): UiLabels {
+  const source = data?.uiLabelsEs;
 
   return {
-    homeLabel: source?.homeLabel || fallback.homeLabel,
-    aboutLabel: source?.aboutLabel || fallback.aboutLabel,
-    servicesLabel: source?.servicesLabel || fallback.servicesLabel,
-    postsLabel: source?.postsLabel || fallback.postsLabel,
-    contactLabel: source?.contactLabel || fallback.contactLabel,
-    headerWhatsappLabel: source?.headerWhatsappLabel || fallback.headerWhatsappLabel,
-    floatingBookingLabel: source?.floatingBookingLabel || fallback.floatingBookingLabel,
-    backToTopLabel: source?.backToTopLabel || fallback.backToTopLabel
+    homeLabel: source?.homeLabel || defaultUiLabels.homeLabel,
+    aboutLabel: source?.aboutLabel || defaultUiLabels.aboutLabel,
+    servicesLabel: source?.servicesLabel || defaultUiLabels.servicesLabel,
+    postsLabel: source?.postsLabel || defaultUiLabels.postsLabel,
+    contactLabel: source?.contactLabel || defaultUiLabels.contactLabel,
+    headerWhatsappLabel: source?.headerWhatsappLabel || defaultUiLabels.headerWhatsappLabel,
+    floatingBookingLabel: source?.floatingBookingLabel || defaultUiLabels.floatingBookingLabel,
+    backToTopLabel: source?.backToTopLabel || defaultUiLabels.backToTopLabel
   };
 }
 
-export const getHomePageData = cache(async (language: Locale) => {
+export const getHomePageData = cache(async () => {
   try {
     const [homePage, faqs, services, contactPage, posts] = await Promise.all([
-      sanityClient.fetch<HomePageData | null>(homePageQuery, { language }, cmsFetchOptions),
-      sanityClient.fetch<FaqData[]>(faqsQuery, { language }, cmsFetchOptions),
-      sanityClient.fetch<ServiceData[]>(servicesQuery, { language }, cmsFetchOptions),
-      sanityClient.fetch<ContactPageData | null>(contactPageQuery, { language }, cmsFetchOptions),
-      sanityClient.fetch<PostCardData[]>(postsPreviewQuery, { language }, cmsFetchOptions)
+      sanityClient.fetch<HomePageData | null>(homePageQuery, {}, cmsFetchOptions),
+      sanityClient.fetch<FaqData[]>(faqsQuery, {}, cmsFetchOptions),
+      sanityClient.fetch<ServiceData[]>(servicesQuery, {}, cmsFetchOptions),
+      sanityClient.fetch<ContactPageData | null>(contactPageQuery, {}, cmsFetchOptions),
+      sanityClient.fetch<PostCardData[]>(postsPreviewQuery, {}, cmsFetchOptions)
     ]);
 
     return { homePage, faqs, services, contactPage, posts };
@@ -246,11 +243,11 @@ export const getHomePageData = cache(async (language: Locale) => {
   }
 });
 
-export const getAboutPageData = cache(async (language: Locale) => {
+export const getAboutPageData = cache(async () => {
   try {
     const [page, testimonials] = await Promise.all([
-      sanityClient.fetch<AboutPageData | null>(aboutPageQuery, { language }, cmsFetchOptions),
-      sanityClient.fetch<TestimonialData[]>(testimonialsQuery, { language }, cmsFetchOptions)
+      sanityClient.fetch<AboutPageData | null>(aboutPageQuery, {}, cmsFetchOptions),
+      sanityClient.fetch<TestimonialData[]>(testimonialsQuery, {}, cmsFetchOptions)
     ]);
 
     return { page, testimonials };
@@ -259,33 +256,33 @@ export const getAboutPageData = cache(async (language: Locale) => {
   }
 });
 
-export const getServicesData = cache(async (language: Locale) => {
+export const getServicesData = cache(async () => {
   try {
-    return await sanityClient.fetch<ServiceData[]>(servicesQuery, { language }, cmsFetchOptions);
+    return await sanityClient.fetch<ServiceData[]>(servicesQuery, {}, cmsFetchOptions);
   } catch {
     return [] as ServiceData[];
   }
 });
 
-export const getContactPageData = cache(async (language: Locale) => {
+export const getContactPageData = cache(async () => {
   try {
-    return await sanityClient.fetch<ContactPageData | null>(contactPageQuery, { language }, cmsFetchOptions);
+    return await sanityClient.fetch<ContactPageData | null>(contactPageQuery, {}, cmsFetchOptions);
   } catch {
     return null;
   }
 });
 
-export const getPostsData = cache(async (language: Locale) => {
+export const getPostsData = cache(async () => {
   try {
-    return await sanityClient.fetch<PostCardData[]>(postsListQuery, { language }, cmsFetchOptions);
+    return await sanityClient.fetch<PostCardData[]>(postsListQuery, {}, cmsFetchOptions);
   } catch {
     return [] as PostCardData[];
   }
 });
 
-export const getPostsPageData = cache(async (language: Locale) => {
+export const getPostsPageData = cache(async () => {
   try {
-    return await sanityClient.fetch<PostsPageData | null>(postsPageQuery, { language }, cmsFetchOptions);
+    return await sanityClient.fetch<PostsPageData | null>(postsPageQuery, {}, cmsFetchOptions);
   } catch {
     return null;
   }
@@ -293,15 +290,15 @@ export const getPostsPageData = cache(async (language: Locale) => {
 
 export const getPostSlugs = cache(async () => {
   try {
-    return await sanityClient.fetch<Array<{ language: Locale; slug: string }>>(postSlugsQuery, {}, cmsFetchOptions);
+    return await sanityClient.fetch<Array<{ slug: string }>>(postSlugsQuery, {}, cmsFetchOptions);
   } catch {
-    return [] as Array<{ language: Locale; slug: string }>;
+    return [] as Array<{ slug: string }>;
   }
 });
 
-export const getPostBySlug = cache(async (language: Locale, slug: string) => {
+export const getPostBySlug = cache(async (slug: string) => {
   try {
-    return await sanityClient.fetch<PostDetailData | null>(postBySlugQuery, { language, slug }, cmsFetchOptions);
+    return await sanityClient.fetch<PostDetailData | null>(postBySlugQuery, { slug }, cmsFetchOptions);
   } catch {
     return null;
   }
@@ -446,9 +443,9 @@ export function mapAboutContent(
   };
 }
 
-export const getServicesPageData = cache(async (language: Locale) => {
+export const getServicesPageData = cache(async () => {
   try {
-    return await sanityClient.fetch<ServicesPageData | null>(servicesPageQuery, { language }, cmsFetchOptions);
+    return await sanityClient.fetch<ServicesPageData | null>(servicesPageQuery, {}, cmsFetchOptions);
   } catch {
     return null;
   }
@@ -479,10 +476,12 @@ export function mapServicesContent(
     notes: pageData?.notes?.length ? pageData.notes : fallback.notes,
     closingTitle: pageData?.closingTitle || fallback.closingTitle,
     closingBody: pageData?.closingBody || fallback.closingBody,
-    services: services.map((service) => ({
-      title: service.title || "",
-      body: service.summary || fallback.services[0]?.body || ""
-    }))
+    services: services.length
+      ? services.map((service, index) => ({
+          title: service.title || "",
+          body: service.summary || fallback.services[index]?.body || fallback.services[0]?.body || ""
+        }))
+      : fallback.services
   };
 }
 
