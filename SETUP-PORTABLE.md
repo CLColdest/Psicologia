@@ -15,7 +15,17 @@ de memoria de conversacion ni configuraciones locales invisibles.
 4. acceso al repositorio en GitHub
 5. el archivo `.env.local` correcto o sus valores
 
-## Clonar y levantar
+## Sistemas soportados
+
+Este proyecto esta preparado para retomarse tanto en:
+
+- `Windows`
+- `macOS`
+
+El codigo no depende de Windows para ejecutar la app. Lo que cambia entre PCs es
+solo la instalacion base y algunos comandos de shell.
+
+## Clonar e instalar
 
 ```bash
 git clone https://github.com/CLColdest/Psicologia.git
@@ -23,19 +33,27 @@ cd Psicologia
 npm install
 ```
 
+## Crear `.env.local`
+
 Luego crea `.env.local` usando `.env.example` como base.
+
+### macOS / Linux
 
 ```bash
 cp .env.example .env.local
 ```
 
-En Windows PowerShell:
+### Windows PowerShell
 
 ```powershell
 Copy-Item .env.example .env.local
 ```
 
-Despues completa los valores reales y arranca:
+Despues completa los valores reales.
+
+## Arrancar el proyecto
+
+### macOS / Linux / Windows
 
 ```bash
 npm run dev
@@ -84,7 +102,9 @@ Opciones recomendadas:
 1. Gestor de passwords
    Guarda cada variable como nota segura.
 2. Archivo privado fuera del repo
-   Ejemplo: `C:\Users\tu-usuario\secrets\psicologia.env`
+   Ejemplos:
+   - Windows: `C:\Users\tu-usuario\secrets\psicologia.env`
+   - macOS: `~/secrets/psicologia.env`
 3. Vercel / hosting
    Replica las mismas variables en el panel de deploy.
 
@@ -92,9 +112,9 @@ Opciones recomendadas:
 
 Este proyecto ya tiene tres archivos para eso:
 
-- [ARCHITECTURE-PSICOLOGIA.md](/abs/path/C:/Proyectos/Psicologia/ARCHITECTURE-PSICOLOGIA.md)
-- [context.md](/abs/path/C:/Proyectos/Psicologia/context.md)
-- [history.md](/abs/path/C:/Proyectos/Psicologia/history.md)
+- `ARCHITECTURE-PSICOLOGIA.md`
+- `context.md`
+- `history.md`
 
 Orden recomendado para retomar trabajo:
 
@@ -129,6 +149,30 @@ Estamos continuando el proyecto Psicologia desde ese estado.
 5. Ejecutar `npm run dev`.
 6. Confirmar acceso a `/studio` si vas a editar contenido.
 
+## Flujo recomendado si cambias a Mac
+
+1. Instala `Node.js 20+` y verifica con `node -v`.
+2. Clona el repo desde GitHub.
+3. Ejecuta `npm install`.
+4. Crea `.env.local` con `cp .env.example .env.local`.
+5. Copia tus variables reales.
+6. Corre `npm run build`.
+7. Corre `npm run dev`.
+8. Abre `http://localhost:3000`.
+9. Si vas a trabajar con CMS, verifica tambien `http://localhost:3000/studio`.
+
+## Flujo recomendado si cambias a otro Windows
+
+1. Instala `Node.js 20+` y verifica con `node -v`.
+2. Clona el repo desde GitHub.
+3. Ejecuta `npm install`.
+4. Crea `.env.local` con `Copy-Item .env.example .env.local`.
+5. Copia tus variables reales.
+6. Corre `npm run build`.
+7. Corre `npm run dev`.
+8. Abre `http://localhost:3000`.
+9. Si vas a trabajar con CMS, verifica tambien `http://localhost:3000/studio`.
+
 ## Verificaciones utiles
 
 ```bash
@@ -149,3 +193,18 @@ Necesitas:
 
 Sin eso el frontend puede seguir levantando con fallbacks, pero no podras usar el
 CMS real de forma completa.
+
+## Prompt recomendado para retomar con Codex en otro PC
+
+Cuando abras Codex en otro equipo, parte con este mensaje:
+
+```txt
+Lee context.md, history.md y ARCHITECTURE-PSICOLOGIA.md.
+Estamos continuando el proyecto Psicologia desde ese estado.
+```
+
+Y si ya levantaste el entorno local, agrega:
+
+```txt
+El proyecto ya esta instalado, con .env.local configurado y listo para seguir.
+```
